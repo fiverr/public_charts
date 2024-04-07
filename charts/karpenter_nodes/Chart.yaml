@@ -1,0 +1,7 @@
+apiVersion: v2
+name: karpenter_nodes
+description: A Helm chart for generating NodeClasses and NodePools for Karpenter
+type: application
+
+version: 0.0.1
+appVersion: "0.34.0"

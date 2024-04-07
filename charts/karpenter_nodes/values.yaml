@@ -1,0 +1,112 @@
+
+##Global Configuration
+#Karpenter API Version in CRD
+ApiVersion: v1beta1
+
+clusterName: "" #My Cluster Name
+amiFamily: AL2 #Bottlerocket #AL2023
+IamRole: "" #eks_nodes_role
+
+subnetSelectorTerms: []
+#   - tags:
+#       cluster: eks-cluster
+#       karpenter.sh/discovery/eks-cluster: '*'
+#   - id: subnet-id
+##   Reusing same Tag Name
+#    - tags:
+#        Name: "eks-subnet-1"
+#    - tags:
+#        Name: "eks-subnet-2"
+
+securityGroupSelectorTerms: []
+#  - tags:
+#       cluster: eks-cluster
+#       karpenter.sh/discovery/eks-cluster: '*'
+#  - name: my-security-group
+#  - id: sg-063d7acfb4b06c82c
+##   Reusing same Tag Name
+#    - tags:
+#        Name: "my-security-group-1"
+#    - tags:
+#        Name: "my-security-group-2"
+
+nodeGroupLabelName: nodegroup
+operatingSystems:
+  - linux
+
+nodeTags:
+  team: devops
+  component: eks-karpenter-nodes
+
+availabilityZones: []
+
+#MetaData Options
+httpEndpoint: enabled
+httpProtocolIPv6: disabled
+httpPutResponseHopLimit: 2
+httpTokens: required
+
+#Storage
+blockDeviceMappings:
+  - deviceName: /dev/xvda
+    ebs:
+      volumeSize: 100Gi
+      volumeType: gp3
+      encrypted: false
+      deleteOnTermination: true
+      iops: 3000
+      throughput: 125
+
+registry: "registry-1.docker.io"
+registryCache: true
+registryHost: "" #"http://registry"
+registrySkipVerify: true
+disableIPv6: true
+expireAfter: "720h"
+consolidationPolicy: "WhenUnderutilized"
+consolidateAfter: "5m"
+
+#Default Instance Sizing
+instances:
+  minGeneration: 5
+  architecture: "amd64"
+  categories:
+  - m
+  - r
+  - c
+  cores:
+  - "4"
+  - "8"
+  - "16"
+  capacityType:
+  - spot
+  - on-demand
+
+
+kubelet:
+  systemReserved:
+    cpu: 250m
+    memory: 200Mi
+    ephemeral-storage: 2Gi
+  kubeReserved:
+    cpu: 250m
+    memory: 1Gi
+    ephemeral-storage: 4Gi
+  evictionHard:
+    memory.available: 768Mi
+    nodefs.available: 8%
+    nodefs.inodesFree: 8%
+  evictionSoft:
+    memory.available: 1280Mi
+    nodefs.available: 10%
+    nodefs.inodesFree: 15%
+    imagefs.available: 10%
+    imagefs.inodesFree: 10%
+    pid.available: 10%
+  evictionSoftGracePeriod:
+    imagefs.available: 10m0s
+    imagefs.inodesFree: 10m0s
+    memory.available: 5m0s
+    nodefs.available: 10m0s
+    nodefs.inodesFree: 10m0s
+    pid.available: 2m0s

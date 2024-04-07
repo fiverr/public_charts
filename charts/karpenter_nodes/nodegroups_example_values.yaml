@@ -1,0 +1,8 @@
+excludeInstanceSize:
+  - metal
+
+nodeGroups:
+  nodes-defaults:
+    instances: {}
+  nodes-test:
+    instances: {}

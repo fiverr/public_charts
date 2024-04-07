@@ -1,0 +1,221 @@
+{{- range $k, $v := $.Values.nodeGroups }}
+---
+apiVersion: karpenter.k8s.aws/{{ $.Values.ApiVersion }}
+kind: EC2NodeClass
+kind: NodePool
+metadata:
+  name: "{{ $k }}-{{ $v.instances.architecture | default $.Values.instances.architecture }}"
+spec:
+  template:
+    metadata:
+      labels:
+        {{ $.Values.nodeGroupLabelName }}: {{ $v.nodeGroupLabel | default $k }}
+        cluster: {{ $.Values.clusterName }}
+        {{- if hasKey $v "labels" }}
+        {{- range $labelName, $labelValue := $v.labels }}
+        {{ $labelName }}: {{ $labelValue }}
+        {{- end }}
+        {{- end }}
+      {{- if hasKey $v "annotations" }}
+      annotations:
+        {{- range $annotationName, $annotationValue := $v.annotations }}
+        {{ $annotationName }}: {{ $annotationValue }}
+        {{- end }}
+      {{- end }}
+    spec:
+      nodeClassRef:
+        {{- if hasKey $v "nodeClassRef" }}
+          {{ $v.nodeClassRef | toYaml | nindent 8 }}
+        {{- else }}
+        name: {{ $k }}-{{ $v.instances.architecture | default $.Values.instances.architecture }}
+        {{- end }}
+      {{- if or ($v.additionalTaints) (eq ($v.nodeLabelTaint | default $.Values.nodeLabelTaint) "true") (eq ($v.instances.architecture | default $.Values.instances.architecture) "arm64") }}
+      {{- if haskey $v.taints }}
+      taints:
+        {{- range $v.$taints }}
+        - key: {{ .key }}
+          value: {{ .value }}
+          effect: {{ .effect }}
+        {{- end }}
+      {{- end }}
+      {{- if hasKey $v "startupTaints" }}
+      startupTaints:
+        {{- range $v.startupTaints }}
+        - key: {{ .key }}
+          value: {{ .value }}
+          effect: {{ .effect }}
+        {{- end }}
+      {{- end }}
+      requirements:
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values:
+          {{- range $v.instances.categories | default $.Values.instances.categories }}
+          - {{ . }}
+          {{- end }}
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: In
+          values:
+          {{- range $v.instances.cores | default $.Values.instances.cores }}
+          - {{ . | quote }}
+          {{- end }}
+        {{- if not $v.instances.noMinimumGeneration }}
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values: {{ sub ($v.instances.minGeneration | default $.Values.instances.minGeneration) 1 | quote | list }}
+        {{- end }}
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values:
+          {{- range $v.availabilityZones | default $.Values.availabilityZones }}
+          - {{ . }}
+          {{- end }}
+        - key: "kubernetes.io/arch"
+          operator: In
+          values:
+          {{- if eq ($v.instances.architecture | default $.Values.instances.architecture) "multiarch" }}
+          - amd64
+          - arm64
+          {{- else }}
+          - {{ $v.instances.architecture | default $.Values.instances.architecture }}
+          {{- end }}
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values:
+          {{- range $v.instances.capacityType | default $.Values.instances.capacityType }}
+          - {{ . }}
+          {{- end }}
+        - key: kubernetes.io/os
+          operator: In
+          values:
+          {{- range $v.instances.operatingSystems | default $.Values.instances.operatingSystems }}
+          - {{ . }}
+          {{- end }}
+        {{- if or (hasKey $.Values "excludeFamilies") (hasKey $v "excludeFamilies") }}
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: NotIn
+          values:
+          {{- if hasKey $v "excludeFamilies" }}
+          {{- range $v .excludeFamilies }
+          - {{ . }}
+          {{- end }}
+          {{- else }}
+          {{- range $.Values.excludeFamilies }}
+          - {{ . }}
+          {{- end }}
+          {{- end }}
+        {{- end }}
+        {{- if or (hasKey $.Values "excludeCpuManufacturer") (hasKey $v "excludeCpuManufacturer") }}
+        - key: "karpenter.k8s.aws/instance-cpu-manufacturer"
+          operator: NotIn
+          values:
+          {{- if hasKey $v "excludeCpuManufacturer" }}
+          {{- range $v .excludeCpuManufacturer }}
+          - {{ . }}
+          {{- end }}
+          {{- else }}
+          {{- range $.Values.excludeCpuManufacturer }}
+          - {{ . }}
+          {{- end }}
+          {{- end }}
+        {{- end }}
+        {{- if or (hasKey $.Values "excludeInstanceSize") (hasKey $v "excludeInstanceSize") }}
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: NotIn
+          values:
+          {{- if hasKey $v "excludeInstanceSize" }}
+          {{- range $v .excludeInstanceSize }}
+          - {{ . }}
+          {{- end }}
+          {{- else }}
+          {{- range $.Values.excludeInstanceSize }}
+          - {{ . }}
+          {{- end }}
+          {{- end }}
+        {{- end }}
+        {{- if hasKey $v "capacitySpread" }}
+        - key: capacity-spread
+          operator: In
+          values:
+          {{- range untilStep (int $v.capacitySpread.start) (int (add1 $v.capacitySpread.end)) 1 }}
+            - "{{ . }}"
+          {{- end }}
+        {{- end }}
+        {{- if hasKey $v.instances "instanceTypes" }}
+        - key: node.kubernetes.io/instance-type
+          operator: In
+          values: {{- range $v.instances.instanceTypes }}
+            - {{ . -}}
+          {{- end }}
+        {{- end }}
+      kubelet:
+         {{- if or (hasKey $v.kubelet.clusterDNS) (hasKey $.Values.kubelet.clusterDNS) }}
+          clusterDNS:
+            {{- if hasKey $v.kubelet.clusterDNS }}
+            {{- range $v.kubelet.clusterDNS }}
+            {{ . }}
+            {{- end }}
+            {{- else }}
+            {{- range $.Values.kubelet.clusterDNS }}
+            {{ . }}
+            {{- end }}
+            {{- end }}
+          {{- end }}
+        systemReserved:
+          cpu: {{ $v.kubelet.systemReserved.cpu | default $.Values.kubelet.systemReserved.cpu }}
+          memory: {{ $v.kubelet.systemReserved.memory | default $.Values.kubelet.systemReserved.memory }}
+          ephemeral-storage: {{ $v.kubelet.systemReserved.ephemeralStorage | default $.Values.kubelet.systemReserved.ephemeralStorage }}
+        kubeReserved:
+          cpu: {{ $v.kubelet.kubeReserved.cpu | default $.Values.kubelet.kubeReserved.cpu }}
+          memory: {{ $v.kubelet.kubeReserved.memory | default $.Values.kubelet.kubeReserved.memory }}
+          ephemeral-storage: {{ $v.kubelet.kubeReserved.ephemeralStorage | default $.Values.kubelet.kubeReserved.ephemeralStorage }}
+        evictionHard:
+          memory.available: {{ $v.kubelet.evictionHard.memory.available | default $.Values.kubelet.evictionHard.memory.available }}
+          nodefs.available: {{ $v.kubelet.evictionHard.nodefs.available | default $.Values.kubelet.evictionHard.nodefs.available }}
+          nodefs.inodesFree: {{ $v.kubelet.evictionHard.nodefs.inodesFree | default $.Values.kubelet.evictionHard.nodefs.inodesFree }}
+        evictionSoft:
+          memory.available: {{ $v.kubelet.evictionSoft.memory.available | default $.Values.kubelet.evictionSoft.memory.available }}
+          nodefs.available: {{ $v.kubelet.evictionSoft.nodefs.available | default $.Values.kubelet.evictionSoft.nodefs.available }}
+          nodefs.inodesFree: {{ $v.kubelet.evictionSoft.nodefs.inodesFree | default $.Values.kubelet.evictionSoft.nodefs.inodesFree }}
+          imagefs.available: {{ $v.kubelet.evictionSoft.imagefs.available | default $.Values.kubelet.evictionSoft.imagefs.available }}
+          imagefs.inodesFree: {{ $v.kubelet.evictionSoft.imagefs.inodesFree | default $.Values.kubelet.evictionSoft.imagefs.inodesFree }}
+          pid.available: {{ $v.kubelet.evictionSoft.pid.available | default $.Values.kubelet.evictionSoft.pid.available }}
+        evictionSoftGracePeriod:
+          imagefs.available: {{ $v.kubelet.evictionSoftGracePeriod.imagefs.available | default $.Values.kubelet.evictionSoftGracePeriod.imagefs.available }}
+          imagefs.inodesFree: {{ $v.kubelet.evictionSoftGracePeriod.imagefs.inodesFree | default $.Values.kubelet.evictionSoftGracePeriod.imagefs.inodesFree }}
+          memory.available: {{ $v.kubelet.evictionSoftGracePeriod.memory.available | default $.Values.kubelet.evictionSoftGracePeriod.memory.available }}
+          nodefs.available: {{ $v.kubelet.evictionSoftGracePeriod.nodefs.available | default $.Values.kubelet.evictionSoftGracePeriod.nodefs.available }}
+          nodefs.inodesFree: {{ $v.kubelet.evictionSoftGracePeriod.nodefs.inodesFree | default $.Values.kubelet.evictionSoftGracePeriod.nodefs.inodesFree }}
+          pid.available: {{ $v.kubelet.evictionSoftGracePeriod.pid.available | default $.Values.kubelet.evictionSoftGracePeriod.pid.available }}
+        {{- if or (hasKey $v.kubelet.imageGCHighThresholdPercent) (hasKey $.Values.kubelet.imageGCHighThresholdPercent) }}
+        imageGCHighThresholdPercent: {{ $v.kubelet.imageGCHighThresholdPercent | default $.Values.kubelet.imageGCHighThresholdPercent }}
+        {{- end }}
+        {{- if or (hasKey $v.kubelet.imageGCLowThresholdPercent) (hasKey $.Values.kubelet.imageGCLowThresholdPercent) }}
+        imageGCLowThresholdPercent: {{ $v.kubelet.imageGCLowThresholdPercent | default $.Values.kubelet.imageGCLowThresholdPercent }}
+        {{- end }}
+        {{- if or (hasKey $v.kubelet.imageMinimumGCAge) (hasKey $.Values.kubelet.imageMinimumGCAge) }}
+        cpuCFSQuota: {{ $v.kubelet.cpuCFSQuota | default $.Values.kubelet.cpuCFSQuota }}
+        {{- end }}
+        {{- if or (hasKey $v.kubelet.cpuCFSQuota) (hasKey $.Values.kubelet.cpuCFSQuota) }}
+        podsPerCore: {{ $v.kubelet.podsPerCore | default $.Values.kubelet.podsPerCore }}
+        {{- end }}
+        {{- if or (hasKey $v.kubelet.podsPerCore) (hasKey $.Values.kubelet.podsPerCore) }}
+        maxPods: {{ $v.kubelet.maxPods | default $.Values.kubelet.maxPods }}
+        {{- end }}
+  disruption:
+    expireAfter: {{ $v.expireAfter | default $.Values.expireAfter }}
+    consolidationPolicy: {{$v.consolidationPolicy | default $.Values.consolidationPolicy}}
+    consolidateAfter: {{ $v.consolidateAfter | default $.Values.consolidateAfter }}
+    {{- end }}
+    {{- if $v.budgets }}
+    budgets:
+    {{- $v.budgets | toYaml | nindent 6 }}
+    {{- end }}
+  {{- if haskey $v.limits }}
+  limits:
+    {{- range $limitName, $limitValue := $v.limits }}
+    {{ $limitName }}: {{ $limitValue }}
+    {{- end }}
+  {{- end }}
+  weight: {{ $v.weight | default 1 }}
+{{- end }}
