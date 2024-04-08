@@ -33,7 +33,8 @@ Unit tests are written in `tests` directory. To run the tests, use the following
 
 
 ## Configuration keys
-Note - Most of the values can be overridden per nodegroup
+Note - Most of the values can be overridden per nodegroup (If not specified, it will use the default (Global) values)
+
 
 |  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
 | ------------------------------ | ----------- | ---- | --------- | ----------------------- |
@@ -55,37 +56,43 @@ Note - Most of the values can be overridden per nodegroup
 | `metaDataHttpPutResponseHopLimit` | Metadata HTTP Put Response Hop Limit [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specmetadataoptions) | `String` | x | ✓ |
 | `metaDataHttpTokens`           | Metadata HTTP Tokens [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specmetadataoptions) | `String` | x | ✓ |
 | `userData`                     | User Data (supports templating and your own values) | `MultilineString` | ✓ | ✓ |
-| `instances`                    | Instance provisioners configurations for node types, families and sizing - extended below | `Map` | x | ✓ |
+| `instances`                    | Instance configurations for node types, families and sizing - see below | `Map` | x | ✓ |
 | `instances.minGeneration`      | The minimum instance generation to use (for example 4 = c4,c5,c6 etc) | `Integer` | x | ✓ |
 | `instances.architecture`       | `amd64`, `arm64` or `multiarch` for nodegroups which can have combined architectures | `String` | x | ✓ |
-| `instances.categories`         | Allowed instance categories (c, m, r) | `List` | x | ✓ |
-| `instances.cores`              | Allowed instance with X cores (4, 8) | `List` | x | ✓ |
-| `instances.capacityType`       | `spot`, `on-demand` (can use both on single provisioner) | `List` | x | ✓ |
+| `instances.categories`         | Allowed instance categories (c, m, r) | `List(String)` | x | ✓ |
+| `instances.cores`              | Allowed cores per instance (`"4"`, `"8"`) | `List(String(int))` | x | ✓ |
+| `instances.capacityType`       | `spot`, `on-demand` (can use both on single provisioner) | `List(String)` | x | ✓ |
+| `instances.operatingSystems`   | Allowed operating systems (`"linux"`, `"windows"`) | `List(String)` | x | ✓ |
+| `availabilityZones`            | Availability Zones to use | `List(String)` | x | ✓ |
+| `expireAfter`                  | Specify how long node should be up before refreshing it [Documentation](https://karpenter.sh/docs/concepts/disruption/#automated-methods) | `String` | x | ✓ |
+| `weight`                       | Specify NodeGroup Weight (default is `1`) | `Integer` | x | ✓ |
+| `excludeFamilies`              | Exclude specific instance families | `List` | x | ✓ |
+| `consolidationPolicy`          | Specify how to consolidate nodes [Documentation](https://karpenter.sh/docs/concepts/nodepools/) | `String` | x | ✓ |
+| `consolidateAfter`             | Specify how long to wait before consolidating nodes [Documentation](https://karpenter.sh/docs/concepts/nodepools/) | `String` | ✓ | ✓ |
+| `excludeInstanceSize`          | Exclude specific instance sizes | `List` | ✓ | ✓ |
+| `headRoom`                     | Generate Ultra Low Priority Class for Headroom (see below) | `String` | ✓ | x |
 | `nodegroups.{}.labels`         | Labels to add to nodes `<label_name>`: `<label_value>` | `Map` | ✓ | ✓ |
 | `nodegroups.{}.annotations`    | Annotations to add to nodes `<annotation_name>`: `<annotation_value>` | `Map` | ✓ | ✓ |
 | `nodegroups.{}.nodeClassRef`   | If you wish to use your own nodeClass, specify it [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/) | `Map` | ✓ | ✓ |
 | `nodegroups.{}.taints`         | Taints to add to nodes `- <taint_key>`: `<taint_value>`: `<taint_effect>` | `List(Map)` | ✓ | ✓ |
 | `nodegroups.{}.startupTaints`  | startupTaints to add to nodes `- <taint_key>`: `<taint_value>`: `<taint_effect>` | `List(Map)` | ✓ | ✓ |
-| `nodegroups.{}.instances.*`    | Explicitly specify instances override | `Map` | ✓ | ✓ |
 | `nodegroups.{}.limits`         | Specify Limits [Documentation](https://karpenter.sh/docs/concepts/nodepools/#speclimits) | `Map` | ✓ | ✓ |
-| `nodegroups.{}.nodeGroupLabel` | Override default generated nodegroup label | `String` | ✓ | ✓ |
 | `nodegroups.{}.capacitySpread` | Set range of capacity spread keys (`integers`), set int for `start` and `end` | `Map` | ✓ | ✓ |
-| `nodegroups.{}.*`              | Over-write all above which supports it | `Map` | ✓ | ✓ |
-| `nodegroups.{}.weight`         | Specify NodeGroup Weight (default is `1`) | `Integer` | ✓ | ✓ |
 | `nodegroups.{}.excludeFamilies`| Exclude specific instance families | `List` | ✓ | ✓ |
 | `nodegroups.{}.budgets`        | Specify Disruption Budgets [Documentation](https://karpenter.sh/docs/concepts/disruption/#nodes) | `List` | ✓ | ✓ |
+| `nodegroups.{}.*`              | Over-write all above which supports it | `Map` | ✓ | ✓ |
+| `nodegroups.{}.instances.*`    | Explicitly specify instances override, if using default specify `instances: {}` | `Map` | ✓ | ✓ |
 
 ### Headroom Configuration
+Headroom will create `pause` pods with requetss to just keep empty nodes up and ready for scheduling. This is useful for scaling up quickly when needed.
+The pods will be configured with ultra-low priority, and will be terminated and recreated on new nodes to free them up for usage if needed.
 |  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
 | ------------------------------ | ----------- | ---- | --------- | ----------------------- |
-| `nodegroups.{}.nodeHeadRooms`  | Specify Amount of nodes which will have reserved headroom | `String` | ✓ | ✓ |
-| `nodegroups.{}.nodeHeadRooms.size` | `small`, `medium`, `large`, `xlarge` - see below | `String` | ✓ | ✓ |
-| `nodegroups.{}.nodeHeadRooms.count` | Number of headroom pods to schedule | `Integer` | ✓ | ✓ |
-| `nodegroups.{}.dedicatedNodeHeadRooms` | Specify Amount of empty nodes ready as headroom | `String` | ✓ | ✓ |
-| `nodegroups.{}.dedicatedNodeHeadRooms.size` | `small`, `medium`, `large`, `xlarge` - see below | `String` | ✓ | ✓ |
-| `nodegroups.{}.dedicatedNodeHeadRooms.count` | Number of headroom nodes to schedule | `Integer` | ✓ | ✓ |
-
-
+| `nodegroups.{}.headRoom`       | List of headroom configurations for the nodePool | `List(Map)` | ✓ | ✓ |
+| `nodegroups.{}.headRoom.size`  | `small`, `medium`, `large`, `xlarge` - see below | `String` | ✓ | ✓ |
+| `nodegroups.{}.headRoom.count` | Number of headroom pod replicas to schedule | `Integer` | ✓ | ✓ |
+| `nodegroups.{}.headRoom.antiAffinitySpec` | Required - set antiaffinity to match against all running workloads | `LabelSelectorSpec` | ✓ | ✓ |
+| `nodegroups.{}.headRoom.nameSpaces` | Specify list of namespaces to match again (default `all`) | `List(String)` | ✓ | ✓ |
 
 ## Headroom Sizing
 
