@@ -8,4 +8,3 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: d3adb5/helm-unittest-action@v2
-      - run: helm unittest --helm3 karpenter_nodes

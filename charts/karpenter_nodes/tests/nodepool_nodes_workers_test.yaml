@@ -106,8 +106,8 @@ tests:
           path: spec.template.spec.kubelet.systemReserved.cpu
           value: 750m
       - equal:
-          path: spec.template.spec.kubelet.evictionHard.memory\.available
-          value: 768Mi
+          path: spec.template.spec.kubelet.kubeReserved.ephemeral-storage
+          value: 4Gi
       - equal:
           path: spec.template.spec.kubelet.clusterDNS[0]
           value: "1.1.1.1"
