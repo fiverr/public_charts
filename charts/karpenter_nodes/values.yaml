@@ -40,10 +40,10 @@ nodeTags:
 availabilityZones: []
 
  # MetaData Options
-httpEndpoint: enabled
-httpProtocolIPv6: disabled
-httpPutResponseHopLimit: 2
-httpTokens: required
+metaDataHttpEndpoint: enabled
+metaDataHttpProtocolIPv6: disabled
+metaDataHttpPutResponseHopLimit: 2
+metaDataHttpTokens: required
 
  # Storage
 blockDeviceMappings:
@@ -127,7 +127,7 @@ kubeletEvictionSoftGracePeriodPidAvailable: 2m0s
  # kubeletCpuCFSQuota: true
  # kubeletPodsPerCore: 5
  # kubeletMaxPods: 110
-
+weight: 1
  ## Create Low Priority Class For Generating Headroom
 headRoom: true
 

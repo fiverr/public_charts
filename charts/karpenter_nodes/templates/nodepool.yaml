@@ -217,5 +217,5 @@ spec:
     {{ $limitName }}: {{ $limitValue }}
     {{- end }}
   {{- end }}
-  weight: {{ $v.weight | default 1 }}
+  weight: {{ $v.weight | default $.Values.weight }}
 {{- end }}

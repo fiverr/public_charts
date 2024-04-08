@@ -59,10 +59,10 @@ spec:
   instanceStorePolicy: {{ $.Values.instanceStorePolicy }}
   {{- end }}
   metadataOptions:
-    httpEndpoint: {{ $v.httpEndpoint | default $.Values.httpEndpoint }}
-    httpProtocolIPv6: {{ $v.httpProtocolIPv6 | default $.Values.httpProtocolIPv6 }}
-    httpPutResponseHopLimit: {{ $v.httpPutResponseHopLimit | default $.Values.httpPutResponseHopLimit }}
-    httpTokens: {{ $v.httpTokens | default $.Values.httpTokens }}
+    httpEndpoint: {{ $v.metaDataHttpEndpoint | default $.Values.metaDataHttpEndpoint }}
+    httpProtocolIPv6: {{ $v.metaDataHttpProtocolIPv6 | default $.Values.metaDataHttpProtocolIPv6 }}
+    httpPutResponseHopLimit: {{ $v.metaDataHttpPutResponseHopLimit | default $.Values.metaDataHttpPutResponseHopLimit }}
+    httpTokens: {{ $v.metaDataHttpTokens | default $.Values.metaDataHttpTokens }}
   {{- if or (hasKey $v "userData") (hasKey $.Values "userData") }}
   userData: |
   {{- if hasKey $v "userData" }}
