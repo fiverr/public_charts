@@ -4,8 +4,8 @@
 ApiVersion: v1beta1
 
  # Nodes Configuration
-clusterName: "eks-cluster" # My Cluster Name
-amiFamily: AL2 # Bottlerocket  #AL2023, Can be overridden by amiSelectorTerms
+clusterName: "eks-cluster"    # My Cluster Name
+amiFamily: AL2    # Bottlerocket  #AL2023, Can be overridden by amiSelectorTerms
 IamRole: eks_nodes_role
 
 subnetSelectorTerms: []
@@ -79,7 +79,7 @@ instances:
   operatingSystems:
     - linux
 
- ##E xclude weak types of AMD instances
+ ## Exclude weak types of AMD instances
  # excludeFamilies:
  #  - c6a
  #  - m6a
