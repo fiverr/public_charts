@@ -1,11 +1,12 @@
-
 ##Global Configuration
+
 #Karpenter API Version in CRD
 ApiVersion: v1beta1
 
-clusterName: "" #My Cluster Name
-amiFamily: AL2 #Bottlerocket #AL2023
-IamRole: "" #eks_nodes_role
+#Nodes Configuration
+clusterName: "eks-cluster" #My Cluster Name
+amiFamily: AL2 #Bottlerocket #AL2023, Can be overridden by amiSelectorTerms
+IamRole: eks_nodes_role
 
 subnetSelectorTerms: []
 #   - tags:
@@ -31,8 +32,6 @@ securityGroupSelectorTerms: []
 #        Name: "my-security-group-2"
 
 nodeGroupLabelName: nodegroup
-operatingSystems:
-  - linux
 
 nodeTags:
   team: devops
@@ -57,11 +56,7 @@ blockDeviceMappings:
       iops: 3000
       throughput: 125
 
-registry: "registry-1.docker.io"
-registryCache: true
-registryHost: "" #"http://registry"
-registrySkipVerify: true
-disableIPv6: true
+#Consolidation Options
 expireAfter: "720h"
 consolidationPolicy: "WhenUnderutilized"
 consolidateAfter: "5m"
@@ -81,32 +76,60 @@ instances:
   capacityType:
   - spot
   - on-demand
+  operatingSystems:
+    - linux
 
+##Exclude weak types of AMD instances
+#excludeFamilies:
+#  - c6a
+#  - m6a
+#  - r6a
+#  - c5a
+#  - m5a
+#  - r5a
+#  - c6ad
+#  - m6ad
+#  - r6ad
+#  - m5ad
+#  - r5ad
+#  - r5ad
 
-kubelet:
-  systemReserved:
-    cpu: 250m
-    memory: 200Mi
-    ephemeral-storage: 2Gi
-  kubeReserved:
-    cpu: 250m
-    memory: 1Gi
-    ephemeral-storage: 4Gi
-  evictionHard:
-    memory.available: 768Mi
-    nodefs.available: 8%
-    nodefs.inodesFree: 8%
-  evictionSoft:
-    memory.available: 1280Mi
-    nodefs.available: 10%
-    nodefs.inodesFree: 15%
-    imagefs.available: 10%
-    imagefs.inodesFree: 10%
-    pid.available: 10%
-  evictionSoftGracePeriod:
-    imagefs.available: 10m0s
-    imagefs.inodesFree: 10m0s
-    memory.available: 5m0s
-    nodefs.available: 10m0s
-    nodefs.inodesFree: 10m0s
-    pid.available: 2m0s
+##Exclude Expensive types like Metal
+#excludeInstanceSize:
+#  - metal
+
+#Kubelet Configuration paramemters
+#kubeletClusterDNS: []
+kubeletSystemReservedCpu: 250m
+kubeletSystemReservedMemory: 200Mi
+kubeletSystemReservedEphemeralStorage: 2Gi
+kubeletKubeReservedCpu: 250m
+kubeletKubeReservedMemory: 1Gi
+kubeletKubeReservedEphemeralStorage: 4Gi
+kubeletEvictionHardMemoryAvailable: 768Mi
+kubeletEvictionHardNodefsAvailable: 8%
+kubeletEvictionHardNodefsInodesFree: 8%
+kubeletEvictionSoftMemoryAvailable: 1280Mi
+kubeletEvictionSoftNodefsAvailable: 10%
+kubeletEvictionSoftNodefsInodesFree: 15%
+kubeletEvictionSoftImagefsAvailable: 10%
+kubeletEvictionSoftImagefsInodesFree: 10%
+kubeletEvictionSoftPidAvailable: 10%
+kubeletEvictionSoftGracePeriodImagefsAvailable: 10m0s
+kubeletEvictionSoftGracePeriodImagefsInodesFree: 10m0s
+kubeletEvictionSoftGracePeriodMemoryAvailable: 5m0s
+kubeletEvictionSoftGracePeriodNodefsAvailable: 10m0s
+kubeletEvictionSoftGracePeriodNodefsInodesFree: 10m0s
+kubeletEvictionSoftGracePeriodPidAvailable: 2m0s
+#kubeletImageGCHighThresholdPercent: 85
+#kubeletImageGCLowThresholdPercent: 80
+#kubeletImageMinimumGCAge: 2m0s
+#kubeletCpuCFSQuota: true
+#kubeletPodsPerCore: 5
+#kubeletMaxPods: 110
+
+## Create Low Priority Class For Generating Headroom
+headRoom: true
+
+#PlaceHolder fo NodeGroups
+nodeGroups: {}

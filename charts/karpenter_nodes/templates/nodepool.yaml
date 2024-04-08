@@ -1,7 +1,6 @@
 {{- range $k, $v := $.Values.nodeGroups }}
 ---
 apiVersion: karpenter.k8s.aws/{{ $.Values.ApiVersion }}
-kind: EC2NodeClass
 kind: NodePool
 metadata:
   name: "{{ $k }}-{{ $v.instances.architecture | default $.Values.instances.architecture }}"
@@ -29,10 +28,9 @@ spec:
         {{- else }}
         name: {{ $k }}-{{ $v.instances.architecture | default $.Values.instances.architecture }}
         {{- end }}
-      {{- if or ($v.additionalTaints) (eq ($v.nodeLabelTaint | default $.Values.nodeLabelTaint) "true") (eq ($v.instances.architecture | default $.Values.instances.architecture) "arm64") }}
-      {{- if haskey $v.taints }}
+      {{- if hasKey $v "taints" }}
       taints:
-        {{- range $v.$taints }}
+        {{- range $v.taints }}
         - key: {{ .key }}
           value: {{ .value }}
           effect: {{ .effect }}
@@ -59,11 +57,10 @@ spec:
           {{- range $v.instances.cores | default $.Values.instances.cores }}
           - {{ . | quote }}
           {{- end }}
-        {{- if not $v.instances.noMinimumGeneration }}
         - key: karpenter.k8s.aws/instance-generation
           operator: Gt
-          values: {{ sub ($v.instances.minGeneration | default $.Values.instances.minGeneration) 1 | quote | list }}
-        {{- end }}
+          values:
+          - {{ sub ($v.instances.minGeneration | default $.Values.instances.minGeneration) 1 | quote }}
         - key: "topology.kubernetes.io/zone"
           operator: In
           values:
@@ -96,7 +93,7 @@ spec:
           operator: NotIn
           values:
           {{- if hasKey $v "excludeFamilies" }}
-          {{- range $v .excludeFamilies }
+          {{- range $v.excludeFamilies }}
           - {{ . }}
           {{- end }}
           {{- else }}
@@ -144,74 +141,77 @@ spec:
         {{- if hasKey $v.instances "instanceTypes" }}
         - key: node.kubernetes.io/instance-type
           operator: In
-          values: {{- range $v.instances.instanceTypes }}
+          values:
+          {{- range $v.instances.instanceTypes }}
             - {{ . -}}
           {{- end }}
         {{- end }}
       kubelet:
-         {{- if or (hasKey $v.kubelet.clusterDNS) (hasKey $.Values.kubelet.clusterDNS) }}
-          clusterDNS:
-            {{- if hasKey $v.kubelet.clusterDNS }}
-            {{- range $v.kubelet.clusterDNS }}
-            {{ . }}
-            {{- end }}
-            {{- else }}
-            {{- range $.Values.kubelet.clusterDNS }}
-            {{ . }}
-            {{- end }}
-            {{- end }}
+        {{- if or (hasKey $v "kubeletClusterDNS") (hasKey $.Values "kubeletClusterDNS") }}
+        clusterDNS:
+          {{- if hasKey $v "kubeletClusterDNS" }}
+          {{- range $v.kubeletClusterDNS }}
+          - {{ . }}
           {{- end }}
+          {{- else }}
+          {{- range $.Values.kubeletClusterDNS }}
+          - {{ . }}
+          {{- end }}
+          {{- end }}
+        {{- end }}
         systemReserved:
-          cpu: {{ $v.kubelet.systemReserved.cpu | default $.Values.kubelet.systemReserved.cpu }}
-          memory: {{ $v.kubelet.systemReserved.memory | default $.Values.kubelet.systemReserved.memory }}
-          ephemeral-storage: {{ $v.kubelet.systemReserved.ephemeralStorage | default $.Values.kubelet.systemReserved.ephemeralStorage }}
+          cpu: {{ $v.kubeletSystemReservedCpu | default $.Values.kubeletSystemReservedCpu }}
+          memory: {{ $v.kubeletSystemReservedMemory | default $.Values.kubeletSystemReservedMemory }}
+          ephemeral-storage: {{ $v.kubeletSystemReservedEphemeralStorage | default $.Values.kubeletSystemReservedEphemeralStorage }}
         kubeReserved:
-          cpu: {{ $v.kubelet.kubeReserved.cpu | default $.Values.kubelet.kubeReserved.cpu }}
-          memory: {{ $v.kubelet.kubeReserved.memory | default $.Values.kubelet.kubeReserved.memory }}
-          ephemeral-storage: {{ $v.kubelet.kubeReserved.ephemeralStorage | default $.Values.kubelet.kubeReserved.ephemeralStorage }}
+          cpu: {{ $v.kubeletKubeReservedCpu | default $.Values.kubeletKubeReservedCpu }}
+          memory: {{ $v.kubeletKubeReservedMemory | default $.Values.kubeletKubeReservedMemory }}
+          ephemeral-storage: {{ $v.kubeletKubeReservedEphemeralStorage | default $.Values.kubeletKubeReservedEphemeralStorage }}
         evictionHard:
-          memory.available: {{ $v.kubelet.evictionHard.memory.available | default $.Values.kubelet.evictionHard.memory.available }}
-          nodefs.available: {{ $v.kubelet.evictionHard.nodefs.available | default $.Values.kubelet.evictionHard.nodefs.available }}
-          nodefs.inodesFree: {{ $v.kubelet.evictionHard.nodefs.inodesFree | default $.Values.kubelet.evictionHard.nodefs.inodesFree }}
+          memory.available: {{ $v.kubeletEvictionHardMemoryAvailable | default $.Values.kubeletEvictionHardMemoryAvailable }}
+          nodefs.available: {{ $v.kubeletEvictionHardNodefsAvailable | default $.Values.kubeletEvictionHardNodefsAvailable }}
+          nodefs.inodesFree: {{ $v.kubeletEvictionHardNodefsInodesFree | default $.Values.kubeletEvictionHardNodefsInodesFree }}
         evictionSoft:
-          memory.available: {{ $v.kubelet.evictionSoft.memory.available | default $.Values.kubelet.evictionSoft.memory.available }}
-          nodefs.available: {{ $v.kubelet.evictionSoft.nodefs.available | default $.Values.kubelet.evictionSoft.nodefs.available }}
-          nodefs.inodesFree: {{ $v.kubelet.evictionSoft.nodefs.inodesFree | default $.Values.kubelet.evictionSoft.nodefs.inodesFree }}
-          imagefs.available: {{ $v.kubelet.evictionSoft.imagefs.available | default $.Values.kubelet.evictionSoft.imagefs.available }}
-          imagefs.inodesFree: {{ $v.kubelet.evictionSoft.imagefs.inodesFree | default $.Values.kubelet.evictionSoft.imagefs.inodesFree }}
-          pid.available: {{ $v.kubelet.evictionSoft.pid.available | default $.Values.kubelet.evictionSoft.pid.available }}
+          memory.available: {{ $v.kubeletEvictionSoftMemoryAvailable | default $.Values.kubeletEvictionSoftMemoryAvailable }}
+          nodefs.available: {{ $v.kubeletEvictionSoftNodefsAvailable | default $.Values.kubeletEvictionSoftNodefsAvailable }}
+          nodefs.inodesFree: {{ $v.kubeletEvictionSoftNodefsInodesFree | default $.Values.kubeletEvictionSoftNodefsInodesFree }}
+          imagefs.available: {{ $v.kubeletEvictionSoftImagefsAvailable | default $.Values.kubeletEvictionSoftImagefsAvailable }}
+          imagefs.inodesFree: {{ $v.kubeletEvictionSoftImagefsInodesFree | default $.Values.kubeletEvictionSoftImagefsInodesFree }}
+          pid.available: {{ $v.kubeletEvictionSoftPidAvailable | default $.Values.kubeletEvictionSoftPidAvailable }}
         evictionSoftGracePeriod:
-          imagefs.available: {{ $v.kubelet.evictionSoftGracePeriod.imagefs.available | default $.Values.kubelet.evictionSoftGracePeriod.imagefs.available }}
-          imagefs.inodesFree: {{ $v.kubelet.evictionSoftGracePeriod.imagefs.inodesFree | default $.Values.kubelet.evictionSoftGracePeriod.imagefs.inodesFree }}
-          memory.available: {{ $v.kubelet.evictionSoftGracePeriod.memory.available | default $.Values.kubelet.evictionSoftGracePeriod.memory.available }}
-          nodefs.available: {{ $v.kubelet.evictionSoftGracePeriod.nodefs.available | default $.Values.kubelet.evictionSoftGracePeriod.nodefs.available }}
-          nodefs.inodesFree: {{ $v.kubelet.evictionSoftGracePeriod.nodefs.inodesFree | default $.Values.kubelet.evictionSoftGracePeriod.nodefs.inodesFree }}
-          pid.available: {{ $v.kubelet.evictionSoftGracePeriod.pid.available | default $.Values.kubelet.evictionSoftGracePeriod.pid.available }}
-        {{- if or (hasKey $v.kubelet.imageGCHighThresholdPercent) (hasKey $.Values.kubelet.imageGCHighThresholdPercent) }}
-        imageGCHighThresholdPercent: {{ $v.kubelet.imageGCHighThresholdPercent | default $.Values.kubelet.imageGCHighThresholdPercent }}
+          imagefs.available: {{ $v.kubeletEvictionSoftGracePeriodImagefsAvailable | default $.Values.kubeletEvictionSoftGracePeriodImagefsAvailable }}
+          imagefs.inodesFree: {{ $v.kubeletEvictionSoftGracePeriodImagefsInodesFree | default $.Values.kubeletEvictionSoftGracePeriodImagefsInodesFree }}
+          memory.available: {{ $v.kubeletEvictionSoftGracePeriodMemoryAvailable | default $.Values.kubeletEvictionSoftGracePeriodMemoryAvailable }}
+          nodefs.available: {{ $v.kubeletEvictionSoftGracePeriodNodefsAvailable | default $.Values.kubeletEvictionSoftGracePeriodNodefsAvailable }}
+          nodefs.inodesFree: {{ $v.kubeletEvictionSoftGracePeriodNodefsInodesFree | default $.Values.kubeletEvictionSoftGracePeriodNodefsInodesFree }}
+          pid.available: {{ $v.kubeletEvictionSoftGracePeriodPidAvailable | default $.Values.kubeletEvictionSoftGracePeriodPidAvailable }}
+        {{- if or (hasKey $v "kubeletImageGCHighThresholdPercent") (hasKey $.Values "kubeletImageGCHighThresholdPercent") }}
+        imageGCHighThresholdPercent: {{ $v.kubeletImageGCHighThresholdPercent | default $.Values.kubeletImageGCHighThresholdPercent }}
         {{- end }}
-        {{- if or (hasKey $v.kubelet.imageGCLowThresholdPercent) (hasKey $.Values.kubelet.imageGCLowThresholdPercent) }}
-        imageGCLowThresholdPercent: {{ $v.kubelet.imageGCLowThresholdPercent | default $.Values.kubelet.imageGCLowThresholdPercent }}
+        {{- if or (hasKey $v "kubeletImageGCLowThresholdPercent") (hasKey $.Values "kubeletImageGCLowThresholdPercent") }}
+        imageGCLowThresholdPercent: {{ $v.kubeletImageGCLowThresholdPercent | default $.Values.kubeletImageGCLowThresholdPercent }}
         {{- end }}
-        {{- if or (hasKey $v.kubelet.imageMinimumGCAge) (hasKey $.Values.kubelet.imageMinimumGCAge) }}
-        cpuCFSQuota: {{ $v.kubelet.cpuCFSQuota | default $.Values.kubelet.cpuCFSQuota }}
+        {{- if or (hasKey $v "kubeletImageMinimumGCAge") (hasKey $.Values "kubeletImageMinimumGCAge") }}
+        imageMinimumGCAge: {{ $v.kubeletImageMinimumGCAge | default $.Values.kubeletImageMinimumGCAge }}
         {{- end }}
-        {{- if or (hasKey $v.kubelet.cpuCFSQuota) (hasKey $.Values.kubelet.cpuCFSQuota) }}
-        podsPerCore: {{ $v.kubelet.podsPerCore | default $.Values.kubelet.podsPerCore }}
+        {{- if or (hasKey $v "kubeletCpuCFSQuota") (hasKey $.Values "kubeletCpuCFSQuota") }}
+        cpuCFSQuota: {{ $v.kubeletCpuCFSQuota | default $.Values.kubeletCpuCFSQuota }}
         {{- end }}
-        {{- if or (hasKey $v.kubelet.podsPerCore) (hasKey $.Values.kubelet.podsPerCore) }}
-        maxPods: {{ $v.kubelet.maxPods | default $.Values.kubelet.maxPods }}
+        {{- if or (hasKey $v "kubeletPodsPerCore") (hasKey $.Values "kubeletPodsPerCore") }}
+        podsPerCore: {{ $v.kubeletPodsPerCore | default $.Values.kubeletPodsPerCore }}
+        {{- end }}
+        {{- if or (hasKey $v "kubeletMaxPods") (hasKey $.Values "kubeletMaxPods") }}
+        maxPods: {{ $v.kubeletMaxPods | default $.Values.kubeletMaxPods }}
         {{- end }}
   disruption:
     expireAfter: {{ $v.expireAfter | default $.Values.expireAfter }}
     consolidationPolicy: {{$v.consolidationPolicy | default $.Values.consolidationPolicy}}
     consolidateAfter: {{ $v.consolidateAfter | default $.Values.consolidateAfter }}
-    {{- end }}
     {{- if $v.budgets }}
     budgets:
     {{- $v.budgets | toYaml | nindent 6 }}
     {{- end }}
-  {{- if haskey $v.limits }}
+  {{- if hasKey $v "limits" }}
   limits:
     {{- range $limitName, $limitValue := $v.limits }}
     {{ $limitName }}: {{ $limitValue }}

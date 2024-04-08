@@ -1,3 +1,10 @@
+registry: "registry-1.docker.io"
+registryCache: true
+registryHost: "" #"http://registry"
+registrySkipVerify: true
+disableIPv6: true
+
+
 userData: |
   CLUSTER_NAME={{ $.Values.clusterName }}
   INSTANCEGROUP={{ .value.nodeGroupLabel | default .key }}

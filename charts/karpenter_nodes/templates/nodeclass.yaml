@@ -7,7 +7,6 @@ kind: EC2NodeClass
 metadata:
   name: "{{ $k }}-{{ $v.instances.architecture | default $.Values.instances.architecture }}"
 spec:
-  #IAM Role or Instance Profile to be attached to the instance
   {{- if hasKey $v "IamRole" }}
   role: {{ $v.IamRole }}
   {{- else if hasKey $v "IamInstanceProfile" }}
@@ -19,17 +18,13 @@ spec:
   {{- else }}
   {{- fail "nodeClass error: Either IamRole or IamInstanceProfile must be defined" }}
   {{- end }}
-  #AMI Family (Can be overwritten with selector)
   amiFamily: {{ $v.amiFamily | default $.Values.amiFamily }}
-
   amiSelectorTerms:
   {{- if hasKey $v "amiSelectorTerms" }}
     {{- toYaml $v.amiSelectorTerms | nindent 4 }}
   {{- else }}
     {{- toYaml $.Values.amiSelectorTerms | nindent 4 }}
   {{- end }}
-
-  #Instance Network Configuration
   subnetSelectorTerms:
   {{- if hasKey $v "subnetSelectorTerms" }}
     {{- toYaml $v.subnetSelectorTerms | nindent 4 }}
@@ -42,34 +37,27 @@ spec:
   {{- else }}
     {{- toYaml $.Values.securityGroupSelectorTerms | nindent 4 }}
   {{- end }}
-
-  #Instance Tags
   tags:
     cluster: {{ $.Values.clusterName }}
     {{ $.Values.nodeGroupLabelName }}: {{ $v.nodeGroupLabel | default $k }}
-    {{ if or hasKey ($v "nodeTags") ($.Values "nodeTags") }}
-    {{- toYaml ($v.nodeTags | default $.Values.tags) | nindent 4 }}
+    {{- if or (hasKey $v "nodeTags") (hasKey $.Values "nodeTags") }}
+    {{- toYaml ($v.nodeTags | default $.Values.nodeTags) | nindent 4 }}
     {{- end }}
-    {{ if hasKey $v "additionalNodeTags" }}
+    {{- if hasKey $v "additionalNodeTags" }}
     {{- toYaml $v.tags | nindent 4 }}
     {{- end }}
-    managed_by: "karpenter"
-
-  #Instace Volumes
+    managed_by: karpenter
   blockDeviceMappings:
   {{- if hasKey $v "blockDeviceMappings" }}
     {{- toYaml $v.blockDeviceMappings | nindent 4 }}
   {{- else }}
     {{- toYaml $.Values.blockDeviceMappings | nindent 4 }}
   {{- end }}
-
   {{- if hasKey $v "instanceStorePolicy" }}
   instanceStorePolicy: {{ $v.instanceStorePolicy }}
   {{- else if hasKey $.Values "instanceStorePolicy" }}
   instanceStorePolicy: {{ $.Values.instanceStorePolicy }}
   {{- end }}
-
-  #Instance Metadata
   metadataOptions:
     httpEndpoint: {{ $v.httpEndpoint | default $.Values.httpEndpoint }}
     httpProtocolIPv6: {{ $v.httpProtocolIPv6 | default $.Values.httpProtocolIPv6 }}
