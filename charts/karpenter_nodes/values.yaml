@@ -1,11 +1,11 @@
  ## Global Configuration
 
- #Karpenter API Version in CRD
+ # Karpenter API Version in CRD
 ApiVersion: v1beta1
 
- #Nodes Configuration
-clusterName: "eks-cluster" #My Cluster Name
-amiFamily: AL2 #Bottlerocket  #AL2023, Can be overridden by amiSelectorTerms
+ # Nodes Configuration
+clusterName: "eks-cluster" # My Cluster Name
+amiFamily: AL2 # Bottlerocket  #AL2023, Can be overridden by amiSelectorTerms
 IamRole: eks_nodes_role
 
 subnetSelectorTerms: []
@@ -39,13 +39,13 @@ nodeTags:
 
 availabilityZones: []
 
- #MetaData Options
+ # MetaData Options
 httpEndpoint: enabled
 httpProtocolIPv6: disabled
 httpPutResponseHopLimit: 2
 httpTokens: required
 
- #Storage
+ # Storage
 blockDeviceMappings:
   - deviceName: /dev/xvda
     ebs:
@@ -56,12 +56,12 @@ blockDeviceMappings:
       iops: 3000
       throughput: 125
 
- #Consolidation Options
+ # Consolidation Options
 expireAfter: "720h"
 consolidationPolicy: "WhenUnderutilized"
 consolidateAfter: "5m"
 
- #Default Instance Sizing
+ # Default Instance Sizing
 instances:
   minGeneration: 5
   architecture: "amd64"
@@ -79,8 +79,8 @@ instances:
   operatingSystems:
     - linux
 
- ##Exclude weak types of AMD instances
- #excludeFamilies:
+ ##E xclude weak types of AMD instances
+ # excludeFamilies:
  #  - c6a
  #  - m6a
  #  - r6a
@@ -94,12 +94,12 @@ instances:
  #  - r5ad
  #  - r5ad
 
- ##Exclude Expensive types like Metal
- #excludeInstanceSize:
+ ## Exclude Expensive types like Metal
+ # excludeInstanceSize:
  #  - metal
 
- #Kubelet Configuration paramemters
- #kubeletClusterDNS: []
+ # Kubelet Configuration paramemters
+ # kubeletClusterDNS: []
 kubeletSystemReservedCpu: 250m
 kubeletSystemReservedMemory: 200Mi
 kubeletSystemReservedEphemeralStorage: 2Gi
@@ -121,15 +121,15 @@ kubeletEvictionSoftGracePeriodMemoryAvailable: 5m0s
 kubeletEvictionSoftGracePeriodNodefsAvailable: 10m0s
 kubeletEvictionSoftGracePeriodNodefsInodesFree: 10m0s
 kubeletEvictionSoftGracePeriodPidAvailable: 2m0s
- #kubeletImageGCHighThresholdPercent: 85
- #kubeletImageGCLowThresholdPercent: 80
- #kubeletImageMinimumGCAge: 2m0s
- #kubeletCpuCFSQuota: true
- #kubeletPodsPerCore: 5
- #kubeletMaxPods: 110
+ # kubeletImageGCHighThresholdPercent: 85
+ # kubeletImageGCLowThresholdPercent: 80
+ # kubeletImageMinimumGCAge: 2m0s
+ # kubeletCpuCFSQuota: true
+ # kubeletPodsPerCore: 5
+ # kubeletMaxPods: 110
 
  ## Create Low Priority Class For Generating Headroom
 headRoom: true
 
- #PlaceHolder fo NodeGroups
+ # PlaceHolder fo NodeGroups
 nodeGroups: {}
