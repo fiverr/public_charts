@@ -29,6 +29,9 @@ nodeGroups:
     nodeHeadRooms:
       - size: small
         count: 2
+        antiAffinitySpec:
+          - key: testlabel1
+            operator: Exists
     labels:
       testlabel1: label1
       testlabel2: label2

@@ -1,4 +1,4 @@
-suite: test nodepools
+suite: test nodepool - nodes-workers
 templates:
   - nodepool.yaml
 
