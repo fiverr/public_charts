@@ -3,5 +3,5 @@ name: karpenter_nodes
 description: A Helm chart for generating NodeClasses and NodePools for Karpenter
 type: application
 maintainers:
-  -name: Fiverr DevOps Team
+  - name: Fiverr DevOps Team
 version: 0.0.1
