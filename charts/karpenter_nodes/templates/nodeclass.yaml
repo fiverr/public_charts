@@ -66,7 +66,7 @@ spec:
   {{- if or (hasKey $v "userData") (hasKey $.Values "userData") }}
   userData: |
   {{- if hasKey $v "userData" }}
-    {{- tpl $.Values.userData $ | nindent 4 }}
+    {{- tpl $v.userData $ | nindent 4 }}
   {{- else if hasKey $.Values "userData" }}
     {{- tpl $.Values.userData $ | nindent 4 }}
   {{- end }}

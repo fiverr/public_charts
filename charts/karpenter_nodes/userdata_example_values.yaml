@@ -4,7 +4,9 @@ registryHost: "" #"http://registry"
 registrySkipVerify: true
 disableIPv6: true
 
-
+nodeGroups:
+  nodes-default:
+    instances: {}
 userData: |
   CLUSTER_NAME={{ $.Values.clusterName }}
   INSTANCEGROUP={{ .value.nodeGroupLabel | default .key }}

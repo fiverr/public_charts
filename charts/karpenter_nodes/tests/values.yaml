@@ -86,7 +86,7 @@ nodeGroups:
     kubeletClusterDNS:
       - "1.1.1.1"
       - "2.2.2.2"
-    userdata: |
+    userData: |
       echo "Nodepool name is {{ default .key }}"
     capacitySpread:
       start: 1

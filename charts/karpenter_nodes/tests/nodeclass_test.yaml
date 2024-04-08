@@ -109,6 +109,10 @@ tests:
       - equal:
           path: spec.metadataOptions.httpPutResponseHopLimit
           value: 2
+      - equal:
+          path: spec.userData
+          value: |
+            echo "Nodepool name is nodes-workers"
 
 
 
