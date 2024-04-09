@@ -26,4 +26,4 @@ You can then run `helm search repo fiverr_public` to see the charts.
 ![Tests](https://github.com/fiverr/public_charts/actions/workflows/test.yml/badge.svg)
 
 ## Charts
-[Karpenter Nodes](https://github.com/fiverr/public_charts/tree/main/charts/karpenter_nodes)
+[Karpenter Nodes](https://github.com/fiverr/public_charts/tree/master/charts/karpenter_nodes)
