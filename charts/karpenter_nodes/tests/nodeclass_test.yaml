@@ -56,6 +56,13 @@ tests:
       - equal:
           path: spec.metadataOptions.httpPutResponseHopLimit
           value: 2
+      - equal:
+          path: spec.detailedMonitoring
+          value: false
+      - equal:
+          path: spec.associatePublicIPAddress
+          value: false
+
 
   - it: Verify nodes-workers
     documentIndex: 1
@@ -113,6 +120,11 @@ tests:
           path: spec.userData
           value: |
             echo "Nodepool name is nodes-workers"
-
+      - equal:
+          path: spec.detailedMonitoring
+          value: true
+      - equal:
+          path: spec.associatePublicIPAddress
+          value: true
 
 

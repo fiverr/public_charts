@@ -58,6 +58,8 @@ spec:
   {{- else if hasKey $.Values "instanceStorePolicy" }}
   instanceStorePolicy: {{ $.Values.instanceStorePolicy }}
   {{- end }}
+  detailedMonitoring: {{ $v.detailedMonitoring | default $.Values.detailedMonitoring }}
+  associatePublicIPAddress: {{ $v.associatePublicIPAddress | default $.Values.associatePublicIPAddress }}
   metadataOptions:
     httpEndpoint: {{ $v.metaDataHttpEndpoint | default $.Values.metaDataHttpEndpoint }}
     httpProtocolIPv6: {{ $v.metaDataHttpProtocolIPv6 | default $.Values.metaDataHttpProtocolIPv6 }}

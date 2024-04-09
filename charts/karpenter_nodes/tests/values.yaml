@@ -39,6 +39,8 @@ nodeGroups:
           iops: 3000
           throughput: 125
     IamInstanceProfile: "arn:aws:blablablabla"
+    detailedMonitoring: true
+    associatePublicIPAddress: true
     excludeFamilies:
       - m6a
     headRoom:

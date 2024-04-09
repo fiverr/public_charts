@@ -56,6 +56,8 @@ blockDeviceMappings:
       iops: 3000
       throughput: 125
 
+detailedMonitoring: false
+associatePublicIPAddress: false
  # Consolidation Options
 expireAfter: "720h"
 consolidationPolicy: "WhenUnderutilized"

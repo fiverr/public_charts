@@ -44,6 +44,8 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 | `additionalNodeTags`           | Additional Tags to add to the instances `<tag_name>`: `<tag_value>` | `Map` | ✓ | ✓ |
 | `nodegroups.{}`                | each will be used to setup a provisioner and template based on the nodegrup name key | `List[Maps]` | x | ✓ |
 | `blockDeviceMappings`          | Block Device Mappings [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specblockdevicemappings) | `List(Map)` | x | ✓ |
+| `detailedMonitoring`           | Detailed Monitoring [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specdetailedmonitoring) | `Boolean` | x | ✓ |
+| `associatePublicIPAddress`     | Associate Public IP Address [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specassociatepublicipaddress) | `Boolean` | x | ✓ |
 | `instanceStorePolicy`          | Instance Store Policy [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specinstancestorepolicy) | `String` | ✓ | ✓ |
 | `metaDataHttpEndpoint`         | Metadata HTTP Endpoint [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specmetadataoptions) | `String` | x | ✓ |
 | `metaDataHttpProtocolIPv6`     | Metadata HTTP Protocol IPv6 [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specmetadataoptions) | `String` | x | ✓ |
