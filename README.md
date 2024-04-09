@@ -1,4 +1,4 @@
-Fiverr Community Helm Charts
+# Fiverr Community Helm Charts
 
 The code is provided as-is with no warranties.
 
@@ -22,7 +22,7 @@ You can then run `helm search repo fiverr_public` to see the charts.
 
 ## Helm charts build status
 
-![Release Charts](https://github.com/fiverr/public_charts/actions/workflows/release.yml/badge.svg?branch=main)
+![Release Charts](https://github.com/fiverr/public_charts/actions/workflows/release.yml/badge.svg?branch=master)
 ![Tests](https://github.com/fiverr/public_charts/actions/workflows/test.yml/badge.svg)
 
 ## Charts
