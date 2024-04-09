@@ -1,19 +1,10 @@
 ## Fiverr Public Helm Templates - Karpenter Nodes
 
-## Table of contents
-- [Table of contents](#table-of-contents)
-- [Introduction](#introduction)
-- [Working with Helm](#working-with-helm)
-  - [Testing Your Changes](#testing-your-changes)
-- [Configuration keys](#configuration-keys)
-
-## Introduction
-
+### Introduction
 This Helm Template is designed to generate NodeClasses and NodePools using [Karpenter](https://karpenter.sh/) in addition to optional HeadRoom.
-
 The template follows a naming convention which is comprised of the `nodegroup` name and its architecture (amd64, arm64 or multiarch).
-
 For example `nodes-default-amd64`
+The chart will loop over the `nodegroups` and generate the relevant NodeClasses and NodePools.
 
 ### UserData
 The `UserData` field supports templating and your own values. You can take a look at the `userdata_example_values.yaml` file for an example.
@@ -34,7 +25,6 @@ Unit tests are written in `tests` directory. To run the tests, use the following
 
 ## Configuration keys
 Note - Most of the values can be overridden per nodegroup (If not specified, it will use the default (Global) values)
-
 
 |  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
 | ------------------------------ | ----------- | ---- | --------- | ----------------------- |
@@ -71,6 +61,9 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 | `consolidateAfter`             | Specify how long to wait before consolidating nodes [Documentation](https://karpenter.sh/docs/concepts/nodepools/) | `String` | ✓ | ✓ |
 | `excludeInstanceSize`          | Exclude specific instance sizes | `List` | ✓ | ✓ |
 | `headRoom`                     | Generate Ultra Low Priority Class for Headroom (see below) | `String` | ✓ | x |
+
+### NodeGroup Configuration
+|  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
 | `nodegroups.{}.labels`         | Labels to add to nodes `<label_name>`: `<label_value>` | `Map` | ✓ | ✓ |
 | `nodegroups.{}.annotations`    | Annotations to add to nodes `<annotation_name>`: `<annotation_value>` | `Map` | ✓ | ✓ |
 | `nodegroups.{}.nodeClassRef`   | If you wish to use your own nodeClass, specify it [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/) | `Map` | ✓ | ✓ |
@@ -81,7 +74,7 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 | `nodegroups.{}.excludeFamilies`| Exclude specific instance families | `List` | ✓ | ✓ |
 | `nodegroups.{}.budgets`        | Specify Disruption Budgets [Documentation](https://karpenter.sh/docs/concepts/disruption/#nodes) | `List` | ✓ | ✓ |
 | `nodegroups.{}.*`              | Over-write all above which supports it | `Map` | ✓ | ✓ |
-| `nodegroups.{}.instances.*`    | Explicitly specify instances override, if using default specify `instances: {}` | `Map` | ✓ | ✓ |
+| `nodegroups.{}.instances.*`    | Explicitly specify instances override, if using defaults specify `instances: {}` | `Map` | ✓ | ✓ |
 
 ### Headroom Configuration
 Headroom will create `pause` pods with requetss to just keep empty nodes up and ready for scheduling. This is useful for scaling up quickly when needed.
@@ -94,7 +87,7 @@ The pods will be configured with ultra-low priority, and will be terminated and 
 | `nodegroups.{}.headRoom.antiAffinitySpec` | Required - set antiaffinity to match against all running workloads | `LabelSelectorSpec` | ✓ | ✓ |
 | `nodegroups.{}.headRoom.nameSpaces` | Specify list of namespaces to match again (default `all`) | `List(String)` | ✓ | ✓ |
 
-## Headroom Sizing
+### Headroom Sizing
 
 |  Size | CPU | Ram |
 | ----- | --- | --- |
@@ -102,3 +95,37 @@ The pods will be configured with ultra-low priority, and will be terminated and 
 | `medium` | 2 | 8Gi |
 | `large` | 4 | 16Gi |
 | `xlarge` | 8 | 32Gi |
+
+### Kubelet Configuration
+[Documentation](https://karpenter.sh/docs/concepts/nodepools/#spectemplatespeckubelet)
+Kubelet configuration can be set globally or per nodegroup. The following keys are supported:
+|  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
+| ------------------------------ | ----------- | ---- | --------- | ----------------------- |
+| `kubeletClusterDNS`            | Cluster DNS | `List` | ✓ | ✓ |
+| `kubeletSystemReservedCpu`     | System Reserved CPU | `String` | x | ✓ |
+| `kubeletSystemReservedMemory`  | System Reserved Memory | `String` | x | ✓ |
+| `kubeletSystemReservedEphemeralStorage` | System Reserved Ephemeral Storage | `String` | x | ✓ |
+| `kubeletKubeReservedCpu`       | Kube Reserved CPU | `String` | x | ✓ |
+| `kubeletKubeReservedMemory`    | Kube Reserved Memory | `String` | x | ✓ |
+| `kubeletKubeReservedEphemeralStorage` | Kube Reserved Ephemeral Storage | `String` | x | ✓ |
+| `kubeletEvictionHardMemoryAvailable` | Eviction Hard Memory Available | `String` | x | ✓ |
+| `kubeletEvictionHardNodefsAvailable` | Eviction Hard Nodefs Available | `String` | x | ✓ |
+| `kubeletEvictionHardNodefsInodesFree` | Eviction Hard Nodefs Inodes Free | `String` | x | ✓ |
+| `kubeletEvictionSoftMemoryAvailable` | Eviction Soft Memory Available | `String` | x | ✓ |
+| `kubeletEvictionSoftNodefsAvailable` | Eviction Soft Nodefs Available | `String` | x | ✓ |
+| `kubeletEvictionSoftNodefsInodesFree` | Eviction Soft Nodefs Inodes Free | `String` | x | ✓ |
+| `kubeletEvictionSoftImagefsAvailable` | Eviction Soft Imagefs Available | `String` | x | ✓ |
+| `kubeletEvictionSoftImagefsInodesFree` | Eviction Soft Imagefs Inodes Free | `String` | x | ✓ |
+| `kubeletEvictionSoftPidAvailable` | Eviction Soft Pid Available | `String` | x | ✓ |
+| `kubeletEvictionSoftGracePeriodImagefsAvailable` | Eviction Soft Grace Period Imagefs Available | `String` | x | ✓ |
+| `kubeletEvictionSoftGracePeriodImagefsInodesFree` | Eviction Soft Grace Period Imagefs Inodes Free | `String` | x | ✓ |
+| `kubeletEvictionSoftGracePeriodMemoryAvailable` | Eviction Soft Grace Period Memory Available | `String` | x | ✓ |
+| `kubeletEvictionSoftGracePeriodNodefsAvailable` | Eviction Soft Grace Period Nodefs Available | `String` | x | ✓ |
+| `kubeletEvictionSoftGracePeriodNodefsInodesFree` | Eviction Soft Grace Period Nodefs Inodes Free | `String` | x | ✓ |
+| `kubeletEvictionSoftGracePeriodPidAvailable` | Eviction Soft Grace Period Pid Available | `String` | x | ✓ |
+| `kubeletImageGCHighThresholdPercent` | Image GC High Threshold Percent | `String` | ✓ | ✓ |
+| `kubeletImageGCLowThresholdPercent` | Image GC Low Threshold Percent | `String` | ✓ | ✓ |
+| `kubeletImageMinimumGCAge` | Image Minimum GC Age | `String` | ✓ | ✓ |
+| `kubeletCpuCFSQuota` | CPU CFS Quota | `String` | ✓ | ✓ |
+| `kubeletPodsPerCore` | Pods Per Core | `String` | ✓ | ✓ |
+| `kubeletMaxPods` | Max Pods | `String` | ✓ | ✓ |
