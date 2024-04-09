@@ -129,3 +129,6 @@ Kubelet configuration can be set globally or per nodegroup. The following keys a
 | `kubeletCpuCFSQuota` | CPU CFS Quota | `String` | ✓ | ✓ |
 | `kubeletPodsPerCore` | Pods Per Core | `String` | ✓ | ✓ |
 | `kubeletMaxPods` | Max Pods | `String` | ✓ | ✓ |
+
+## Extras
+See grafana directory for dashbaords available for you to import into your Grafana instance.
