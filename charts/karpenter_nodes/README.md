@@ -82,7 +82,7 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 | `nodegroups.{}.instances.*`    | Explicitly specify instances override, if using defaults specify `instances: {}` | `Map` | ✓ | ✓ |
 
 ### Headroom Configuration
-Headroom will create `pause` pods with requetss to just keep empty nodes up and ready for scheduling. This is useful for scaling up quickly when needed.<br>
+Headroom will create `pause` pods with requetss to just keep empty nodes up and ready for scheduling.<br> This is useful for scaling up quickly when needed.<br>
 The pods will be configured with ultra-low priority, and will be terminated and recreated on new nodes to free them up for usage if needed.
 |  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
 | ------------------------------ | ----------- | ---- | --------- | ----------------------- |
