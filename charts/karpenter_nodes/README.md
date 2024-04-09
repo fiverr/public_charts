@@ -37,8 +37,8 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 | `IamInstanceProfile`           | Existing instance profile To set on the instances <br>(not required if `IamRole` is specified)| `String` | x | ✓ |
 | `amiFamily`                    | AMIFamily to use (Default to AL2) [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specamifamily) | `String` | x | ✓ |
 | `amiSelectorTerms`             | AMI Selector Terms (This will override `amiFamily`) [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specamiselectorterms) | `List(Map)` | x | ✓ |
-| `subnetSelectorTerms`          | Selector for Subnets | `List(Map)` [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specsubnetselectorterms) | x | ✓ |
-| `securityGroupSelectorTerms`   | Selector for Security Groups | `List(Map)` [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specsecuritygroupselectorterms) | x | ✓ |
+| `subnetSelectorTerms`          | Selector for Subnets [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specsubnetselectorterms) | `List(Map)` | x | ✓ |
+| `securityGroupSelectorTerms`   | Selector for Security Groups [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specsecuritygroupselectorterms) | `List(Map)` | x | ✓ |
 | `nodeGroupLabelName`           | The Name of the label for each nodegroup (default is `nodegroup`) | `String` | x | ✓ |
 | `nodeTags`                     | Tags to add to the instances `<tag_name>`: `<tag_value>` | `Map` | ✓ | ✓ |
 | `additionalNodeTags`           | Additional Tags to add to the instances `<tag_name>`: `<tag_value>` | `Map` | ✓ | ✓ |
