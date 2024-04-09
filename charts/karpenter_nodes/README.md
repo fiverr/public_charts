@@ -2,8 +2,11 @@
 
 ### Introduction
 This Helm Template is designed to generate NodeClasses and NodePools using [Karpenter](https://karpenter.sh/) in addition to optional HeadRoom.
+
 The template follows a naming convention which is comprised of the `nodegroup` name and its architecture (amd64, arm64 or multiarch).
+
 For example `nodes-default-amd64`
+
 The chart will loop over the `nodegroups` and generate the relevant NodeClasses and NodePools.
 
 ### UserData
@@ -19,6 +22,7 @@ After making changes you will probably want to see the new output. Run `helm tem
 
 ### Unit Tests
 Make sure you have `helm-unittest` plugin installed. [helm-unittest](https://github.com/helm-unittest/helm-unittest)
+
 Unit tests are written in `tests` directory. To run the tests, use the following command: </br>
 `helm unittest --helm3 karpenter_nodes -f "tests/$value/*_test.yaml"`
 
@@ -64,6 +68,7 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 
 ### NodeGroup Configuration
 |  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
+| ------------------------------ | ----------- | ---- | --------- | ----------------------- |
 | `nodegroups.{}.labels`         | Labels to add to nodes `<label_name>`: `<label_value>` | `Map` | ✓ | ✓ |
 | `nodegroups.{}.annotations`    | Annotations to add to nodes `<annotation_name>`: `<annotation_value>` | `Map` | ✓ | ✓ |
 | `nodegroups.{}.nodeClassRef`   | If you wish to use your own nodeClass, specify it [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/) | `Map` | ✓ | ✓ |
@@ -77,7 +82,7 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 | `nodegroups.{}.instances.*`    | Explicitly specify instances override, if using defaults specify `instances: {}` | `Map` | ✓ | ✓ |
 
 ### Headroom Configuration
-Headroom will create `pause` pods with requetss to just keep empty nodes up and ready for scheduling. This is useful for scaling up quickly when needed.
+Headroom will create `pause` pods with requetss to just keep empty nodes up and ready for scheduling. This is useful for scaling up quickly when needed.<br>
 The pods will be configured with ultra-low priority, and will be terminated and recreated on new nodes to free them up for usage if needed.
 |  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
 | ------------------------------ | ----------- | ---- | --------- | ----------------------- |
