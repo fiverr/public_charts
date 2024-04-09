@@ -14,7 +14,12 @@ The `UserData` field supports templating and your own values. You can take a loo
 
 ## Working with Helm
 
-### Todo - add helm install command when repo is public and alive with real url
+### Setting up
+1. Add Repository: </br>```helm repo add fiverr_public https://opensource.fiverr.com/public_charts/```
+2. Either get the values.yaml file from the repository or pull it with the following command: </br>```helm show values fiverr_public/karpenter_nodes > values.yaml```
+3. Edit the values.yaml file to your needs.
+4. Install the chart: </br>```helm install karpenter_nodes fiverr_public/karpenter_nodes -f values.yaml```
+
 
 ### Testing Your Changes
 After making changes you will probably want to see the new output. Run `helm template` with the relevant example files: </br>
