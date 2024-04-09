@@ -3,7 +3,7 @@ name: Lint and Test
 on: pull_request
 
 jobs:
-  lint-and-version-check:
+  lint-and-version-check-then-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,9 +35,7 @@ jobs:
       - name: Run chart-testing (lint)
         if: steps.list-changed.outputs.changed == 'true'
         run: ct lint --target-branch ${{ github.event.repository.default_branch }}
-  unittest:
-    needs: lint-and-version-check #Add after first chart release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: d3adb5/helm-unittest-action@v2
+
+      - name: Run chart-testing (unit)
+        uses: d3adb5/helm-unittest-action@v2
+        if: steps.list-changed.outputs.changed == 'true'
