@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   karpenter_nodes:
   - apiVersion: v2
+    created: "2024-04-15T11:37:37.52701686Z"
+    description: A Helm chart for generating NodeClasses and NodePools for Karpenter
+    digest: 446094fd566001473749e883f7f412bb8176001ee3e336916dff894adb585378
+    maintainers:
+    - name: nadavbuc
+    name: karpenter_nodes
+    urls:
+    - https://github.com/fiverr/public_charts/releases/download/karpenter_nodes-0.1.2/karpenter_nodes-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     created: "2024-04-15T11:15:30.106373003Z"
     description: A Helm chart for generating NodeClasses and NodePools for Karpenter
     digest: a29a7fdf3d7699fb52b8e546c57510528c4a7478132e91409a0bc83d137e60f6
@@ -41,4 +51,4 @@ entries:
     urls:
     - https://github.com/fiverr/public_charts/releases/download/karpenter_nodes-0.0.1/karpenter_nodes-0.0.1.tgz
     version: 0.0.1
-generated: "2024-04-15T11:15:30.106392209Z"
+generated: "2024-04-15T11:37:37.527040614Z"
