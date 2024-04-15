@@ -17,8 +17,8 @@ You can then run `helm search repo fiverr_public` to see the charts.
 
 ## License
 
-<!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
-[Apache 2.0 License](https://github.com/fiverr/public_charts/blob/main/LICENSE).
+<!-- Keep full URL links to repo files because this README syncs from master to gh-pages.  -->
+[Apache 2.0 License](https://github.com/fiverr/public_charts/blob/master/LICENSE).
 
 ## Helm charts build status
 
