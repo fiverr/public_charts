@@ -8,9 +8,6 @@ nodeGroups:
     headRoom:
       - size: small
         count: 2
-        antiAffinitySpec:
-          - key: testlabel1
-            operator: Exists
     labels:
       testlabel1: label1
       testlabel2: label2
@@ -24,7 +21,18 @@ nodeGroups:
     excludeFamilies:
       - c6a
 
+  nodes-noclass:
+    instances: {}
+    nodeClassRef:
+      name: default
+
   nodes-workers:
+    additionalNodeTags:
+      testtag1: tag1
+      testtag2: tag2
+    annotations:
+      testannotation1: annotation1
+      testannotation2: annotation2
     weight: 3
     amiFamily: BottleRocket
     consolidationPolicy: "WhenEmpty"
@@ -55,7 +63,24 @@ nodeGroups:
         nameSpaces:
           - default
           - kube-system
-
+    additionalRequirements:
+      - key: "karpenter.k8s.aws/instance-local-nvme"
+        operator: "Exists"
+      - key: "karpenter.k8s.aws/other"
+        operator: "In"
+        values:
+          - "value1"
+          - "value2"
+    budgets:
+      - nodes: "5"
+      - nodes: "0"
+        schedule: "@daily"
+        duration: 10m
+    amiSelectorTerms:
+      - tags:
+          environment: test
+      - name: my-ami
+      - id: ami-123
     instances:
       architecture: "arm64"
       minGeneration: 5

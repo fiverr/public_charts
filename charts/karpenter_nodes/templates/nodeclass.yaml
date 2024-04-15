@@ -1,6 +1,7 @@
 {{- range $k, $v := $.Values.nodeGroups }}
 {{- $_ := set $ "key" $k }}
 {{- $_ := set $ "value" $v }}
+{{- if not (hasKey $v "nodeClassRef") }}
 ---
 apiVersion: karpenter.k8s.aws/{{ $.Values.ApiVersion }}
 kind: EC2NodeClass
@@ -20,10 +21,8 @@ spec:
   {{- end }}
   amiFamily: {{ $v.amiFamily | default $.Values.amiFamily }}
   amiSelectorTerms:
-  {{- if hasKey $v "amiSelectorTerms" }}
-    {{- toYaml $v.amiSelectorTerms | nindent 4 }}
-  {{- else }}
-    {{- toYaml $.Values.amiSelectorTerms | nindent 4 }}
+  {{- if or (hasKey $v "amiSelectorTerms") (hasKey $.Values "amiSelectorTerms") }}
+    {{- toYaml ($v.amiSelectorTerms | default $.Values.amiSelectorTerms) | nindent 4 }}
   {{- end }}
   subnetSelectorTerms:
   {{- if hasKey $v "subnetSelectorTerms" }}
@@ -44,7 +43,7 @@ spec:
     {{- toYaml ($v.nodeTags | default $.Values.nodeTags) | nindent 4 }}
     {{- end }}
     {{- if hasKey $v "additionalNodeTags" }}
-    {{- toYaml $v.tags | nindent 4 }}
+    {{- toYaml $v.additionalNodeTags | nindent 4 }}
     {{- end }}
     managed_by: karpenter
   blockDeviceMappings:
@@ -73,4 +72,5 @@ spec:
     {{- tpl $.Values.userData $ | nindent 4 }}
   {{- end }}
   {{- end}}
+{{- end }}
 {{- end }}
