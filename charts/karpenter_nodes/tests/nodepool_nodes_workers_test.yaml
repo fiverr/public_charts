@@ -1,13 +1,12 @@
 suite: test nodepool - nodes-workers
 templates:
   - nodepool.yaml
-
 values:
   - values.yaml
 
 tests:
   - it: Verify nodes-workers metadata
-    documentIndex: 1
+    documentIndex: 2
     asserts:
       - isKind:
           of: NodePool
@@ -51,7 +50,7 @@ tests:
           value: noSchedule
 
   - it: Verify nodes-workers requirements
-    documentIndex: 1
+    documentIndex: 2
     asserts:
       - equal:
           path: spec.template.spec.requirements[0].key
@@ -153,7 +152,7 @@ tests:
 
 
   - it: Verify nodes-workers kubelet
-    documentIndex: 1
+    documentIndex: 2
     asserts:
       - equal:
           path: spec.template.spec.kubelet.systemReserved.cpu
@@ -169,7 +168,7 @@ tests:
           value: "2.2.2.2"
 
   - it: Verify nodes-workers Options
-    documentIndex: 1
+    documentIndex: 2
     asserts:
       - equal:
           path: spec.disruption.expireAfter

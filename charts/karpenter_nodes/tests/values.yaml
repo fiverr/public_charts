@@ -21,6 +21,11 @@ nodeGroups:
     excludeFamilies:
       - c6a
 
+  nodes-noclass:
+    instances: {}
+    nodeClassRef:
+      name: default
+
   nodes-workers:
     additionalNodeTags:
       testtag1: tag1
@@ -76,7 +81,6 @@ nodeGroups:
           environment: test
       - name: my-ami
       - id: ami-123
-
     instances:
       architecture: "arm64"
       minGeneration: 5
