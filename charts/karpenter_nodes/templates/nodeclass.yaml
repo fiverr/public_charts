@@ -1,6 +1,7 @@
 {{- range $k, $v := $.Values.nodeGroups }}
 {{- $_ := set $ "key" $k }}
 {{- $_ := set $ "value" $v }}
+{{- if not (hasKey $v "nodeClassRef") }}
 ---
 apiVersion: karpenter.k8s.aws/{{ $.Values.ApiVersion }}
 kind: EC2NodeClass
@@ -71,4 +72,5 @@ spec:
     {{- tpl $.Values.userData $ | nindent 4 }}
   {{- end }}
   {{- end}}
+{{- end }}
 {{- end }}

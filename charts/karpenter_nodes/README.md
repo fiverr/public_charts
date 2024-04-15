@@ -46,7 +46,6 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 | `securityGroupSelectorTerms`   | Selector for Security Groups [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specsecuritygroupselectorterms) | `List(Map)` | x | ✓ |
 | `nodeGroupLabelName`           | The Name of the label for each nodegroup (default is `nodegroup`) | `String` | x | ✓ |
 | `nodeTags`                     | Tags to add to the instances `<tag_name>`: `<tag_value>` | `Map` | ✓ | ✓ |
-| `additionalNodeTags`           | Additional Tags to add to the instances `<tag_name>`: `<tag_value>` | `Map` | ✓ | ✓ |
 | `nodegroups.{}`                | each will be used to setup a provisioner and template based on the nodegrup name key | `List[Maps]` | x | ✓ |
 | `blockDeviceMappings`          | Block Device Mappings [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specblockdevicemappings) | `List(Map)` | x | ✓ |
 | `detailedMonitoring`           | Detailed Monitoring [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/#specdetailedmonitoring) | `Boolean` | x | ✓ |
@@ -78,6 +77,7 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 |  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
 | ------------------------------ | ----------- | ---- | --------- | ----------------------- |
 | `nodegroups.{}.labels`         | Labels to add to nodes `<label_name>`: `<label_value>` | `Map` | ✓ | ✓ |
+| `nodegroups.{}.additionalNodeTags` | Additional Tags to add to the instances `<tag_name>`: `<tag_value>` | `Map` | ✓ | ✓ |
 | `nodegroups.{}.annotations`    | Annotations to add to nodes `<annotation_name>`: `<annotation_value>` | `Map` | ✓ | ✓ |
 | `nodegroups.{}.nodeClassRef`   | If you wish to use your own nodeClass, specify it [Documentation](https://karpenter.sh/docs/concepts/nodeclasses/) | `Map` | ✓ | ✓ |
 | `nodegroups.{}.taints`         | Taints to add to nodes `- <taint_key>`: `<taint_value>`: `<taint_effect>` | `List(Map)` | ✓ | ✓ |

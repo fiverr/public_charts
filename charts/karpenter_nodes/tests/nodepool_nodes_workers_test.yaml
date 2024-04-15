@@ -23,6 +23,12 @@ tests:
       - isNull:
           path: spec.template.metadata.labels.testlabel1
       - equal:
+          path: spec.template.metadata.annotations.testannotation1
+          value: annotation1
+      - equal:
+          path: spec.template.metadata.annotations.testannotation2
+          value: annotation2
+      - equal:
           path: spec.template.spec.nodeClassRef.name
           value: nodes-workers-arm64
       - equal:
@@ -174,8 +180,18 @@ tests:
       - equal:
           path: spec.disruption.consolidateAfter
           value: 10m
-      - isNull:
-          path: spec.budgets
+      - equal:
+          path: spec.disruption.budgets[0].nodes
+          value: "5"
+      - equal:
+          path: spec.disruption.budgets[1].nodes
+          value: "0"
+      - equal:
+          path: spec.disruption.budgets[1].schedule
+          value: "@daily"
+      - equal:
+          path: spec.disruption.budgets[1].duration
+          value: "10m"
       - equal:
           path: spec.limits.cpu
           value: 100

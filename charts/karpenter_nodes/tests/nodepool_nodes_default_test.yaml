@@ -151,7 +151,7 @@ tests:
           path: spec.disruption.consolidateAfter
           value: 5m
       - isNull:
-          path: spec.budgets
+          path: spec.disruption.budgets
       - isNull:
           path: spec.limits
       - equal:
