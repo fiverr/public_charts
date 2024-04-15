@@ -23,13 +23,13 @@ The `UserData` field supports templating and your own values. You can take a loo
 
 ### Testing Your Changes
 After making changes you will probably want to see the new output. Run `helm template` with the relevant example files: </br>
-`helm template . -f values.yaml`
+`helm template <some-name> . -f values.yaml`
 
 ### Unit Tests
 Make sure you have `helm-unittest` plugin installed. [helm-unittest](https://github.com/helm-unittest/helm-unittest)
 
 Unit tests are written in `tests` directory. To run the tests, use the following command: </br>
-`helm unittest --helm3 karpenter_nodes -f "tests/$value/*_test.yaml"`
+`helm unittest --helm3 karpenter_nodes -f "tests/*_test.yaml"`
 
 
 ## Configuration keys
@@ -72,6 +72,7 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 | `consolidateAfter`             | Specify how long to wait before consolidating nodes [Documentation](https://karpenter.sh/docs/concepts/nodepools/) | `String` | ✓ | ✓ |
 | `excludeInstanceSize`          | Exclude specific instance sizes | `List` | ✓ | ✓ |
 | `headRoom`                     | Generate Ultra Low Priority Class for Headroom (see below) | `String` | ✓ | x |
+| `additionalRequirements`       | add NodePool requirements which are not covered by this chart | `List(map)` | ✓ | ✓ |
 
 ### NodeGroup Configuration
 |  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
@@ -96,7 +97,7 @@ The pods will be configured with ultra-low priority, and will be terminated and 
 | `nodegroups.{}.headRoom`       | List of headroom configurations for the nodePool | `List(Map)` | ✓ | ✓ |
 | `nodegroups.{}.headRoom.size`  | `small`, `medium`, `large`, `xlarge` - see below | `String` | ✓ | ✓ |
 | `nodegroups.{}.headRoom.count` | Number of headroom pod replicas to schedule | `Integer` | ✓ | ✓ |
-| `nodegroups.{}.headRoom.antiAffinitySpec` | Required - set antiaffinity to match against all running workloads | `LabelSelectorSpec` | ✓ | ✓ |
+| `nodegroups.{}.headRoom.antiAffinitySpec` | Optional - set antiaffinity to match against running workloads | `LabelSelectorSpec` | ✓ | ✓ |
 | `nodegroups.{}.headRoom.nameSpaces` | Specify list of namespaces to match again (default `all`) | `List(String)` | ✓ | ✓ |
 
 ### Headroom Sizing

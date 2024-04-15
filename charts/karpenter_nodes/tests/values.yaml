@@ -8,9 +8,6 @@ nodeGroups:
     headRoom:
       - size: small
         count: 2
-        antiAffinitySpec:
-          - key: testlabel1
-            operator: Exists
     labels:
       testlabel1: label1
       testlabel2: label2
@@ -55,6 +52,15 @@ nodeGroups:
         nameSpaces:
           - default
           - kube-system
+    additionalRequirements:
+      - key: "karpenter.k8s.aws/instance-local-nvme"
+        operator: "Exists"
+      - key: "karpenter.k8s.aws/other"
+        operator: "In"
+        values:
+          - "value1"
+          - "value2"
+
 
     instances:
       architecture: "arm64"

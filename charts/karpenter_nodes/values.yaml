@@ -135,3 +135,7 @@ headRoom: true
 
  # PlaceHolder fo NodeGroups
 nodeGroups: {}
+
+#additionalRequirements:
+#  - key: "karpenter.k8s.aws/instance-local-nvme"
+#    operator: "Exists"

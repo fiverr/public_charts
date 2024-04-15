@@ -47,7 +47,9 @@ tests:
   - it: Verify nodes-workers requirements
     documentIndex: 1
     asserts:
-    # instance-category
+      - equal:
+          path: spec.template.spec.requirements[0].key
+          value: "karpenter.k8s.aws/instance-category"
       - notContains:
           path: spec.template.spec.requirements[0].values
           content: m
@@ -57,47 +59,92 @@ tests:
       - equal:
           path: spec.template.spec.requirements[0].values[1]
           value: x
-    # instance-cpu
+      - equal:
+          path: spec.template.spec.requirements[1].key
+          value: "karpenter.k8s.aws/instance-cpu"
       - equal:
           path: spec.template.spec.requirements[1].values[0]
           value: "2"
       - equal:
           path: spec.template.spec.requirements[1].values[1]
           value: "6"
-    # instance-generation
+      - equal:
+          path: spec.template.spec.requirements[2].key
+          value: "karpenter.k8s.aws/instance-generation"
       - equal:
           path: spec.template.spec.requirements[2].operator
           value: "Gt"
       - equal:
           path: spec.template.spec.requirements[2].values[0]
           value: "4"
-    # instance-zone
+      - equal:
+          path: spec.template.spec.requirements[3].key
+          value: "topology.kubernetes.io/zone"
       - equal:
           path: spec.template.spec.requirements[3].values[0]
           value: "eu-west-1g"
-    # instance-architecture
+      - equal:
+          path: spec.template.spec.requirements[4].key
+          value: "kubernetes.io/arch"
       - equal:
           path: spec.template.spec.requirements[4].values[0]
           value: "arm64"
-    # instance-capacity-type
+      - equal:
+          path: spec.template.spec.requirements[5].key
+          value: "karpenter.sh/capacity-type"
       - equal:
           path: spec.template.spec.requirements[5].values[0]
           value: "on-demand"
-    # instance-OS
+      - equal:
+          path: spec.template.spec.requirements[6].key
+          value: "kubernetes.io/os"
       - equal:
           path: spec.template.spec.requirements[6].values[0]
           value: "linux"
-    # instance-family Exclusions
+      - equal:
+          path: spec.template.spec.requirements[7].key
+          value: "karpenter.k8s.aws/instance-family"
+      - equal:
+          path: spec.template.spec.requirements[7].operator
+          value: "NotIn"
       - equal:
           path: spec.template.spec.requirements[7].values[0]
           value: "m6a"
-    # instance-size Exclusiong
+      - equal:
+          path: spec.template.spec.requirements[8].key
+          value: "karpenter.k8s.aws/instance-size"
       - equal:
           path: spec.template.spec.requirements[8].operator
           value: NotIn
       - equal:
           path: spec.template.spec.requirements[8].values[0]
           value: metal
+      - equal:
+          path: spec.template.spec.requirements[9].key
+          value: "capacity-spread"
+      - equal:
+          path: spec.template.spec.requirements[9].values[0]
+          value: "1"
+      - equal:
+          path: spec.template.spec.requirements[9].values[4]
+          value: "5"
+      # additional requirements
+      - equal:
+          path: spec.template.spec.requirements[10].key
+          value: "karpenter.k8s.aws/instance-local-nvme"
+      - equal:
+          path: spec.template.spec.requirements[10].operator
+          value: "Exists"
+      - equal:
+          path: spec.template.spec.requirements[11].key
+          value: "karpenter.k8s.aws/other"
+      - equal:
+          path: spec.template.spec.requirements[11].operator
+          value: "In"
+      - equal:
+          path: spec.template.spec.requirements[11].values[1]
+          value: "value2"
+
 
   - it: Verify nodes-workers kubelet
     documentIndex: 1

@@ -102,20 +102,6 @@ spec:
           {{- end }}
           {{- end }}
         {{- end }}
-        {{- if or (hasKey $.Values "excludeCpuManufacturer") (hasKey $v "excludeCpuManufacturer") }}
-        - key: "karpenter.k8s.aws/instance-cpu-manufacturer"
-          operator: NotIn
-          values:
-          {{- if hasKey $v "excludeCpuManufacturer" }}
-          {{- range $v .excludeCpuManufacturer }}
-          - {{ . }}
-          {{- end }}
-          {{- else }}
-          {{- range $.Values.excludeCpuManufacturer }}
-          - {{ . }}
-          {{- end }}
-          {{- end }}
-        {{- end }}
         {{- if or (hasKey $.Values "excludeInstanceSize") (hasKey $v "excludeInstanceSize") }}
         - key: "karpenter.k8s.aws/instance-size"
           operator: NotIn
@@ -145,6 +131,9 @@ spec:
           {{- range $v.instances.instanceTypes }}
             - {{ . -}}
           {{- end }}
+        {{- end }}
+        {{- if or (hasKey $.Values "additionalRequirements") (hasKey $v "additionalRequirements") }}
+        {{- toYaml ($v.additionalRequirements | default $.Values.additionalRequirements) | nindent 8 }}
         {{- end }}
       kubelet:
         {{- if or (hasKey $v "kubeletClusterDNS") (hasKey $.Values "kubeletClusterDNS") }}
@@ -209,7 +198,7 @@ spec:
     consolidateAfter: {{ $v.consolidateAfter | default $.Values.consolidateAfter }}
     {{- if $v.budgets }}
     budgets:
-    {{- $v.budgets | toYaml | nindent 6 }}
+    {{- toYaml $v.budgets | nindent 6 }}
     {{- end }}
   {{- if hasKey $v "limits" }}
   limits:

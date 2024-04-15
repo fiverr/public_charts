@@ -52,7 +52,9 @@ tests:
   - it: Verify nodes-default requirements
     documentIndex: 0
     asserts:
-    # instance-category
+      - equal:
+          path: spec.template.spec.requirements[0].key
+          value: "karpenter.k8s.aws/instance-category"
       - notContains:
           path: spec.template.spec.requirements[0].values
           content: t
@@ -62,47 +64,63 @@ tests:
       - equal:
           path: spec.template.spec.requirements[0].values[2]
           value: c
-    # instance-cpu
+      - equal:
+          path: spec.template.spec.requirements[1].key
+          value: "karpenter.k8s.aws/instance-cpu"
       - equal:
           path: spec.template.spec.requirements[1].values[0]
           value: "4"
       - equal:
           path: spec.template.spec.requirements[1].values[2]
           value: "16"
-    # instance-generation
+      - equal:
+          path: spec.template.spec.requirements[2].key
+          value: "karpenter.k8s.aws/instance-generation"
       - equal:
           path: spec.template.spec.requirements[2].operator
           value: "Gt"
       - equal:
           path: spec.template.spec.requirements[2].values[0]
           value: "6"
-    # instance-zone
+      - equal:
+          path: spec.template.spec.requirements[3].key
+          value: "topology.kubernetes.io/zone"
       - equal:
           path: spec.template.spec.requirements[3].values[0]
           value: "eu-west-1a"
       - equal:
           path: spec.template.spec.requirements[3].values[2]
           value: "eu-west-1c"
-    # instance-architecture
+      - equal:
+          path: spec.template.spec.requirements[4].key
+          value: "kubernetes.io/arch"
       - equal:
           path: spec.template.spec.requirements[4].values[0]
           value: "amd64"
-    # instance-capacity-type
+      - equal:
+          path: spec.template.spec.requirements[5].key
+          value: "karpenter.sh/capacity-type"
       - equal:
           path: spec.template.spec.requirements[5].values[0]
           value: "spot"
       - equal:
           path: spec.template.spec.requirements[5].values[1]
           value: "on-demand"
-    # instance-OS
+      - equal:
+          path: spec.template.spec.requirements[6].key
+          value: "kubernetes.io/os"
       - equal:
           path: spec.template.spec.requirements[6].values[0]
           value: "linux"
-    # instance-family Exclusions
+      - equal:
+          path: spec.template.spec.requirements[7].key
+          value: "karpenter.k8s.aws/instance-family"
       - equal:
           path: spec.template.spec.requirements[7].values[0]
           value: "c6a"
-    # instance-size Exclusiong
+      - equal:
+          path: spec.template.spec.requirements[8].key
+          value: "karpenter.k8s.aws/instance-size"
       - equal:
           path: spec.template.spec.requirements[8].operator
           value: NotIn
