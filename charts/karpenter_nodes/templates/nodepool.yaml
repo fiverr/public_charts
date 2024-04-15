@@ -195,7 +195,9 @@ spec:
   disruption:
     expireAfter: {{ $v.expireAfter | default $.Values.expireAfter }}
     consolidationPolicy: {{$v.consolidationPolicy | default $.Values.consolidationPolicy}}
+    {{- if eq ($v.consolidationPolicy | default $.Values.consolidationPolicy) "WhenEmpty" }}
     consolidateAfter: {{ $v.consolidateAfter | default $.Values.consolidateAfter }}
+    {{- end }}
     {{- if $v.budgets }}
     budgets:
     {{- toYaml $v.budgets | nindent 6 }}

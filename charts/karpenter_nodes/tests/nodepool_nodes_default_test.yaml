@@ -146,9 +146,8 @@ tests:
       - equal:
           path: spec.disruption.consolidationPolicy
           value: WhenUnderutilized
-      - equal:
+      - isNull:
           path: spec.disruption.consolidateAfter
-          value: 5m
       - isNull:
           path: spec.disruption.budgets
       - isNull:
