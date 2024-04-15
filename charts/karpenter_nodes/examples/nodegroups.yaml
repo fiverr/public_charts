@@ -31,10 +31,7 @@ nodeGroups:
     capacitySpread:
       start: 1
       end: 5
-    taints:
-      - key: "dedicated"
-        value: "workers"
-        effect: "NoSchedule"
+    autoTaint: true
   nodes-workers-c:
     nodeGroupLabel: nodes-workers
     capacitySpread:
@@ -43,10 +40,7 @@ nodeGroups:
     instances:
       categories:
       - c
-    taints:
-      - key: "dedicated"
-        value: "workers"
-        effect: "NoSchedule"
+    autoTaint: true
     nodeClassRef:
       name: nodes-workers-amd64
   nodes-canary:

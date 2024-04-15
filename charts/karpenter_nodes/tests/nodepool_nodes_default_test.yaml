@@ -36,7 +36,7 @@ tests:
           value: taint1
       - equal:
           path: spec.template.spec.taints[0].effect
-          value: noSchedule
+          value: NoSchedule
       - equal:
           path: spec.template.spec.taints[1].key
           value: testtaint2
@@ -45,7 +45,7 @@ tests:
           value: taint2
       - equal:
           path: spec.template.spec.taints[1].effect
-          value: noSchedule
+          value: NoSchedule
 
 
   - it: Verify nodes-default requirements

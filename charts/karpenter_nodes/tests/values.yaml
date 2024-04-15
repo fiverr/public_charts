@@ -13,10 +13,10 @@ nodeGroups:
       testlabel2: label2
     taints:
       - key: testtaint1
-        effect: noSchedule
+        effect: NoSchedule
         value: taint1
       - key: testtaint2
-        effect: noSchedule
+        effect: NoSchedule
         value: taint2
     excludeFamilies:
       - c6a
@@ -123,11 +123,12 @@ nodeGroups:
       memory: "384Gi"
     startupTaints:
       - key: testtaint1
-        effect: noSchedule
+        effect: NoSchedule
         value: taint1
       - key: testtaint2
-        effect: noSchedule
+        effect: NoSchedule
         value: taint2
+    autoTaint: true
 
 #Default cluster Settings
 clusterName: "eks-dev"

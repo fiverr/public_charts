@@ -1526,8 +1526,8 @@ spec:
         name: nodes-workers-amd64
       taints:
         - key: dedicated
-          value: workers
           effect: NoSchedule
+          value: nodes_workers
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
@@ -1641,8 +1641,8 @@ spec:
         name: nodes-workers-amd64
       taints:
         - key: dedicated
-          value: workers
           effect: NoSchedule
+          value: nodes_workers
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
           operator: In

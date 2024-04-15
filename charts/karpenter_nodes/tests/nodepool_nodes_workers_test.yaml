@@ -38,7 +38,7 @@ tests:
           value: taint1
       - equal:
           path: spec.template.spec.startupTaints[0].effect
-          value: noSchedule
+          value: NoSchedule
       - equal:
           path: spec.template.spec.startupTaints[1].key
           value: testtaint2
@@ -47,7 +47,17 @@ tests:
           value: taint2
       - equal:
           path: spec.template.spec.startupTaints[1].effect
-          value: noSchedule
+          value: NoSchedule
+      - equal:
+          path: spec.template.spec.taints[0].key
+          value: dedicated
+      - equal:
+          path: spec.template.spec.taints[0].value
+          value: nodes_workers
+      - equal:
+          path: spec.template.spec.taints[0].effect
+          value: NoSchedule
+
 
   - it: Verify nodes-workers requirements
     documentIndex: 2
