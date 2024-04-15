@@ -1,6 +1,6 @@
 {{- range $k, $v := $.Values.nodeGroups }}
 ---
-apiVersion: karpenter.k8s.aws/{{ $.Values.ApiVersion }}
+apiVersion: karpenter.sh/{{ $.Values.ApiVersion }}
 kind: NodePool
 metadata:
   name: "{{ $k }}-{{ $v.instances.architecture | default $.Values.instances.architecture }}"
