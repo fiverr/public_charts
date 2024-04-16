@@ -81,7 +81,7 @@ instances:
   operatingSystems:
     - linux
 
-autoTaint: false
+autoTaint: "false"
  ## Exclude weak types of AMD instances
  # excludeFamilies:
  #  - c6a

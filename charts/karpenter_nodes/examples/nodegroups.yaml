@@ -1,5 +1,6 @@
 nodeGroups:
   nodes-default:
+    autoTaint: "false"
     weight: 2
     instances:
       categories:
@@ -9,6 +10,7 @@ nodeGroups:
       start: 1
       end: 5
   nodes-default-od:
+    autoTaint: "false"
     nodeGroupLabel: nodes-default
     capacitySpread:
       start: 6
@@ -31,7 +33,7 @@ nodeGroups:
     capacitySpread:
       start: 1
       end: 5
-    autoTaint: true
+
   nodes-workers-c:
     nodeGroupLabel: nodes-workers
     capacitySpread:
@@ -40,7 +42,6 @@ nodeGroups:
     instances:
       categories:
       - c
-    autoTaint: true
     nodeClassRef:
       name: nodes-workers-amd64
   nodes-canary:

@@ -28,9 +28,9 @@ spec:
         {{- else }}
         name: {{ $k }}-{{ $v.instances.architecture | default $.Values.instances.architecture }}
         {{- end }}
-      {{- if or (hasKey $v "taints") ($v.autoTaint | default $.Values.autoTaint) }}
+      {{- if or (hasKey $v "taints") (eq ($v.autoTaint | default $.Values.autoTaint) "true") }}
       taints:
-        {{- if $v.autoTaint | default $.Values.autoTaint }}
+        {{- if eq ($v.autoTaint | default $.Values.autoTaint) "true" }}
         - key: dedicated
           effect: NoSchedule
           value: {{ ($v.nodeGroupLabel | default $k) | replace "-" "_"  }}

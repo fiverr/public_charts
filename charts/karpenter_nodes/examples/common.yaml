@@ -57,7 +57,7 @@ nodeTags:
   created_by: helm
 
 amiFamily: AL2
-
+autoTaint: "true"
 excludeFamilies:
  - c6a
  - m6a

@@ -760,6 +760,9 @@ spec:
         name: nodes-canary-amd64
       taints:
         - key: dedicated
+          effect: NoSchedule
+          value: nodes_canary
+        - key: dedicated
           value: canary
           effect: NoSchedule
       requirements:
@@ -1095,6 +1098,9 @@ spec:
         name: nodes-gpu-amd64
       taints:
         - key: dedicated
+          effect: NoSchedule
+          value: nodes_gpu
+        - key: dedicated
           value: gpu
           effect: NoSchedule
       requirements:
@@ -1209,6 +1215,9 @@ spec:
         name: nodes-ingress-multiarch
       taints:
         - key: dedicated
+          effect: NoSchedule
+          value: nodes_ingress
+        - key: dedicated
           value: ingress
           effect: NoSchedule
       requirements:
@@ -1317,6 +1326,9 @@ spec:
       nodeClassRef:
         name: nodes-jobs-amd64
       taints:
+        - key: dedicated
+          effect: NoSchedule
+          value: nodes_jobs
         - key: dedicated
           value: jobs
           effect: NoSchedule
@@ -1427,6 +1439,9 @@ spec:
       nodeClassRef:
         name: nodes-monitoring-multiarch
       taints:
+        - key: dedicated
+          effect: NoSchedule
+          value: nodes_monitoring
         - key: dedicated
           value: monitoring
           effect: NoSchedule
