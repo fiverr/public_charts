@@ -1,0 +1,121 @@
+nodeGroups:
+  nodes-default:
+    weight: 2
+    instances:
+      categories:
+      - m
+      - r
+    capacitySpread:
+      start: 1
+      end: 5
+  nodes-default-od:
+    nodeGroupLabel: nodes-default
+    capacitySpread:
+      start: 6
+      end: 6
+    instances:
+      minGeneration: 5
+      categories:
+      - m
+      - r
+      capacityType:
+        - on-demand
+    nodeClassRef:
+      name: nodes-default-amd64
+  nodes-workers:
+    weight: 2
+    instances:
+      categories:
+      - m
+      - r
+    capacitySpread:
+      start: 1
+      end: 5
+    autoTaint: true
+  nodes-workers-c:
+    nodeGroupLabel: nodes-workers
+    capacitySpread:
+      start: 1
+      end: 5
+    instances:
+      categories:
+      - c
+    autoTaint: true
+    nodeClassRef:
+      name: nodes-workers-amd64
+  nodes-canary:
+    instances: {}
+    capacitySpread:
+      start: 1
+      end: 5
+    taints:
+      - key: "dedicated"
+        value: "canary"
+        effect: "NoSchedule"
+  nodes-jobs:
+    expireAfter: "Never"
+    instances:
+      capacityType:
+        - on-demand
+    consolidationPolicy: "WhenEmpty"
+    taints:
+      - key: "dedicated"
+        value: "jobs"
+        effect: "NoSchedule"
+    blockDeviceMappings:
+      - deviceName: /dev/xvda
+        ebs:
+          deleteOnTermination: true
+          encrypted: true
+          iops: 9000
+          throughput: 125
+          volumeSize: 500Gi
+          volumeType: gp3
+  nodes-ingress:
+    registryCache: "false"
+    expireAfter: "Never"
+    instances:
+      architecture: "multiarch"
+      capacityType:
+        - on-demand
+    taints:
+      - key: "dedicated"
+        value: "ingress"
+        effect: "NoSchedule"
+  nodes-monitoring:
+    labels:
+      prometheus-scrape: "true" #Not Real Use-case
+    additionalNodeTags:
+      innercomponent: monitoring
+    expireAfter: "Never"
+    instances:
+      architecture: "multiarch"
+      capacityType:
+        - on-demand
+    taints:
+      - key: "dedicated"
+        value: "monitoring"
+        effect: "NoSchedule"
+    excludeFamilies:
+    - x1 #We dont have X in our types but i do want it to not exclude previously defined amd instances
+  nodes-gpu:
+    labels:
+      gpu: "true"
+    instances:
+      instanceTypes:
+      - g5.xlarge
+      - g5.2xlarge
+      - g5.4xlarge
+      categories:
+      - g
+    limits:
+      cpu: "128"
+    taints:
+      - key: "dedicated"
+        value: "gpu"
+        effect: "NoSchedule"
+
+
+
+
+
