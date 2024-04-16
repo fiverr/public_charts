@@ -128,7 +128,7 @@ nodeGroups:
       - key: testtaint2
         effect: NoSchedule
         value: taint2
-    autoTaint: true
+    autoTaint: "true"
 
 #Default cluster Settings
 clusterName: "eks-dev"
