@@ -4,8 +4,8 @@ nodeGroups:
     weight: 2
     instances:
       categories:
-      - m
-      - r
+        - m
+        - r
     capacitySpread:
       start: 1
       end: 5
@@ -18,8 +18,8 @@ nodeGroups:
     instances:
       minGeneration: 5
       categories:
-      - m
-      - r
+        - m
+        - r
       capacityType:
         - on-demand
     nodeClassRef:
@@ -28,12 +28,11 @@ nodeGroups:
     weight: 2
     instances:
       categories:
-      - m
-      - r
+        - m
+        - r
     capacitySpread:
       start: 1
       end: 5
-
   nodes-workers-c:
     nodeGroupLabel: nodes-workers
     capacitySpread:
@@ -41,7 +40,7 @@ nodeGroups:
       end: 5
     instances:
       categories:
-      - c
+        - c
     nodeClassRef:
       name: nodes-workers-amd64
   nodes-canary:
@@ -58,6 +57,9 @@ nodeGroups:
     instances:
       capacityType:
         - on-demand
+      cores:
+        - "8"
+        - "16"
     consolidationPolicy: "WhenEmpty"
     taints:
       - key: "dedicated"
@@ -79,6 +81,9 @@ nodeGroups:
       architecture: "multiarch"
       capacityType:
         - on-demand
+      minGeneration: 7
+      cores:
+        - "8"
     taints:
       - key: "dedicated"
         value: "ingress"
