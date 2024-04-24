@@ -791,7 +791,7 @@ spec:
           values:
           - eu-west-1a
           - eu-west-1b
-          - eu-west-1c    
+          - eu-west-1c
         - key: "kubernetes.io/arch"
           operator: In
           values:
@@ -902,7 +902,7 @@ spec:
           values:
           - eu-west-1a
           - eu-west-1b
-          - eu-west-1c    
+          - eu-west-1c
         - key: "kubernetes.io/arch"
           operator: In
           values:
@@ -1013,7 +1013,7 @@ spec:
           values:
           - eu-west-1a
           - eu-west-1b
-          - eu-west-1c    
+          - eu-west-1c
         - key: "kubernetes.io/arch"
           operator: In
           values:
@@ -1109,7 +1109,7 @@ spec:
           values:
           - eu-west-1a
           - eu-west-1b
-          - eu-west-1c    
+          - eu-west-1c
         - key: "kubernetes.io/arch"
           operator: In
           values:
@@ -1222,7 +1222,7 @@ spec:
           values:
           - eu-west-1a
           - eu-west-1b
-          - eu-west-1c    
+          - eu-west-1c
         - key: "kubernetes.io/arch"
           operator: In
           values:
@@ -1329,7 +1329,7 @@ spec:
           values:
           - eu-west-1a
           - eu-west-1b
-          - eu-west-1c    
+          - eu-west-1c
         - key: "kubernetes.io/arch"
           operator: In
           values:
@@ -1442,7 +1442,7 @@ spec:
           values:
           - eu-west-1a
           - eu-west-1b
-          - eu-west-1c    
+          - eu-west-1c
         - key: "kubernetes.io/arch"
           operator: In
           values:
@@ -1539,7 +1539,7 @@ spec:
           values:
           - eu-west-1a
           - eu-west-1b
-          - eu-west-1c    
+          - eu-west-1c
         - key: "kubernetes.io/arch"
           operator: In
           values:
@@ -1653,7 +1653,7 @@ spec:
           values:
           - eu-west-1a
           - eu-west-1b
-          - eu-west-1c    
+          - eu-west-1c
         - key: "kubernetes.io/arch"
           operator: In
           values:
