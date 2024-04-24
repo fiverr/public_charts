@@ -75,7 +75,7 @@ spec:
           values:
           {{- range $v.availabilityZones | default $.Values.availabilityZones }}
           - {{ . }}
-          {{- end }}    
+          {{- end }}
         - key: "kubernetes.io/arch"
           operator: In
           values:
