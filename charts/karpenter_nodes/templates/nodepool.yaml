@@ -52,6 +52,7 @@ spec:
         {{- end }}
       {{- end }}
       requirements:
+      {{- if not (hasKey $v.instances "instanceTypes") }}
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
           values:
@@ -68,12 +69,13 @@ spec:
           operator: Gt
           values:
           - {{ sub ($v.instances.minGeneration | default $.Values.instances.minGeneration) 1 | quote }}
+      {{- end }}
         - key: "topology.kubernetes.io/zone"
           operator: In
           values:
           {{- range $v.availabilityZones | default $.Values.availabilityZones }}
           - {{ . }}
-          {{- end }}
+          {{- end }}    
         - key: "kubernetes.io/arch"
           operator: In
           values:

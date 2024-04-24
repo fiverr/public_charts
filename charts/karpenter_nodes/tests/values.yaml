@@ -130,6 +130,14 @@ nodeGroups:
         value: taint2
     autoTaint: "true"
 
+  nodes-explicittypes:
+    instances:
+      instanceTypes:
+        - t3a.large
+        - t3a.xlarge
+    nodeClassRef:
+      name: default
+
 #Default cluster Settings
 clusterName: "eks-dev"
 subnetSelectorTerms:
