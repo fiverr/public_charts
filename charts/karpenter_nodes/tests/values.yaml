@@ -4,22 +4,22 @@ nodeGroups:
     instances:
       minGeneration: 7
     budget:
-      - nodes: "2"
+    - nodes: "2"
     headRoom:
-      - size: small
-        count: 2
+    - size: small
+      count: 2
     labels:
       testlabel1: label1
       testlabel2: label2
     taints:
-      - key: testtaint1
-        effect: NoSchedule
-        value: taint1
-      - key: testtaint2
-        effect: NoSchedule
-        value: taint2
+    - key: testtaint1
+      effect: NoSchedule
+      value: taint1
+    - key: testtaint2
+      effect: NoSchedule
+      value: taint2
     excludeFamilies:
-      - c6a
+    - c6a
 
   nodes-noclass:
     instances: {}
@@ -38,49 +38,49 @@ nodeGroups:
     consolidationPolicy: "WhenEmpty"
     consolidateAfter: "10m"
     blockDeviceMappings:
-      - deviceName: /dev/xvda
-        ebs:
-          volumeSize: 150Gi
-          volumeType: gp3
-          encrypted: false
-          deleteOnTermination: true
-          iops: 3000
-          throughput: 125
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 150Gi
+        volumeType: gp3
+        encrypted: false
+        deleteOnTermination: true
+        iops: 3000
+        throughput: 125
     IamInstanceProfile: "arn:aws:blablablabla"
     detailedMonitoring: true
     associatePublicIPAddress: true
     excludeFamilies:
-      - m6a
+    - m6a
     headRoom:
-      - size: xlarge
-        count: 4
-        antiAffinitySpec:
-          - key: testlabel2
-            operator: In
-            values:
-              - value1
-              - value2
-        nameSpaces:
-          - default
-          - kube-system
-    additionalRequirements:
-      - key: "karpenter.k8s.aws/instance-local-nvme"
-        operator: "Exists"
-      - key: "karpenter.k8s.aws/other"
-        operator: "In"
+    - size: xlarge
+      count: 4
+      antiAffinitySpec:
+      - key: testlabel2
+        operator: In
         values:
-          - "value1"
-          - "value2"
+        - value1
+        - value2
+      nameSpaces:
+      - default
+      - kube-system
+    additionalRequirements:
+    - key: "karpenter.k8s.aws/instance-local-nvme"
+      operator: "Exists"
+    - key: "karpenter.k8s.aws/other"
+      operator: "In"
+      values:
+      - "value1"
+      - "value2"
     budgets:
-      - nodes: "5"
-      - nodes: "0"
-        schedule: "@daily"
-        duration: 10m
+    - nodes: "5"
+    - nodes: "0"
+      schedule: "@daily"
+      duration: 10m
     amiSelectorTerms:
-      - tags:
-          environment: test
-      - name: my-ami
-      - id: ami-123
+    - tags:
+        environment: test
+    - name: my-ami
+    - id: ami-123
     instances:
       architecture: "arm64"
       minGeneration: 5
@@ -93,26 +93,26 @@ nodeGroups:
       capacityType:
       - on-demand
     subnetSelectorTerms:
-      - tags:
-          Name: "eks-subnet-workers-1"
-      - tags:
-          Name: "eks-subnet-workers-2"
-      - tags:
-          Name: "eks-subnet-workers-3"
+    - tags:
+        Name: "eks-subnet-workers-1"
+    - tags:
+        Name: "eks-subnet-workers-2"
+    - tags:
+        Name: "eks-subnet-workers-3"
     securityGroupSelectorTerms:
-      - tags:
-          Name: "my-security-group-workers-1"
-      - tags:
-          Name: "my-security-group-workers-2"
-      - tags:
-          Name: "my-security-group-workers-3"
+    - tags:
+        Name: "my-security-group-workers-1"
+    - tags:
+        Name: "my-security-group-workers-2"
+    - tags:
+        Name: "my-security-group-workers-3"
     availabilityZones:
-      - eu-west-1g
+    - eu-west-1g
     instanceStorePolicy: "test"
     kubeletSystemReservedCpu: 750m
     kubeletClusterDNS:
-      - "1.1.1.1"
-      - "2.2.2.2"
+    - "1.1.1.1"
+    - "2.2.2.2"
     userData: |
       echo "Nodepool name is {{ default .key }}"
     capacitySpread:
@@ -122,44 +122,44 @@ nodeGroups:
       cpu: "100"
       memory: "384Gi"
     startupTaints:
-      - key: testtaint1
-        effect: NoSchedule
-        value: taint1
-      - key: testtaint2
-        effect: NoSchedule
-        value: taint2
+    - key: testtaint1
+      effect: NoSchedule
+      value: taint1
+    - key: testtaint2
+      effect: NoSchedule
+      value: taint2
     autoTaint: "true"
 
   nodes-explicittypes:
     instances:
       instanceTypes:
-        - t3a.large
-        - t3a.xlarge
+      - t3a.large
+      - t3a.xlarge
     nodeClassRef:
       name: default
 
 #Default cluster Settings
 clusterName: "eks-dev"
 subnetSelectorTerms:
-  - tags:
-      Name: "eks-subnet-1"
-  - tags:
-      Name: "eks-subnet-2"
-  - tags:
-      Name: "eks-subnet-3"
+- tags:
+    Name: "eks-subnet-1"
+- tags:
+    Name: "eks-subnet-2"
+- tags:
+    Name: "eks-subnet-3"
 
 securityGroupSelectorTerms:
-  - tags:
-      Name: "my-security-group-1"
-  - tags:
-      Name: "my-security-group-2"
-  - tags:
-      Name: "my-security-group-3"
+- tags:
+    Name: "my-security-group-1"
+- tags:
+    Name: "my-security-group-2"
+- tags:
+    Name: "my-security-group-3"
 
 availabilityZones:
-  - eu-west-1a
-  - eu-west-1b
-  - eu-west-1c
+- eu-west-1a
+- eu-west-1b
+- eu-west-1c
 
 excludeInstanceSize:
-  - metal
+- metal
