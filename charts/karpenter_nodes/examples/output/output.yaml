@@ -1,3 +1,4 @@
+---
 # Source: karpenter_nodes/templates/priorityclass.yaml
 apiVersion: scheduling.k8s.io/v1
 kind: PriorityClass
@@ -17,17 +18,17 @@ spec:
   amiFamily: AL2
   amiSelectorTerms:
   subnetSelectorTerms:
-  - tags:
-      Name: eks-dev-eu-west-1a
-  - tags:
-      Name: eks-dev-eu-west-1b
-  - tags:
-      Name: eks-dev-eu-west-1c
+    - tags:
+        Name: eks-dev-eu-west-1a
+    - tags:
+        Name: eks-dev-eu-west-1b
+    - tags:
+        Name: eks-dev-eu-west-1c
   securityGroupSelectorTerms:
-  - tags:
-      Name: eks-nodes
-  - tags:
-      Name: eks-dev
+    - tags:
+        Name: eks-nodes
+    - tags:
+        Name: eks-dev
   tags:
     cluster: eks-dev
     nodegroup: nodes-canary
@@ -36,14 +37,14 @@ spec:
     team: devops
     managed_by: karpenter
   blockDeviceMappings:
-  - deviceName: /dev/xvda
-    ebs:
-      deleteOnTermination: true
-      encrypted: true
-      iops: 3000
-      throughput: 125
-      volumeSize: 100Gi
-      volumeType: gp3
+    - deviceName: /dev/xvda
+      ebs:
+        deleteOnTermination: true
+        encrypted: true
+        iops: 3000
+        throughput: 125
+        volumeSize: 100Gi
+        volumeType: gp3
   detailedMonitoring: false
   associatePublicIPAddress: false
   metadataOptions:
@@ -123,17 +124,17 @@ spec:
   amiFamily: AL2
   amiSelectorTerms:
   subnetSelectorTerms:
-  - tags:
-      Name: eks-dev-eu-west-1a
-  - tags:
-      Name: eks-dev-eu-west-1b
-  - tags:
-      Name: eks-dev-eu-west-1c
+    - tags:
+        Name: eks-dev-eu-west-1a
+    - tags:
+        Name: eks-dev-eu-west-1b
+    - tags:
+        Name: eks-dev-eu-west-1c
   securityGroupSelectorTerms:
-  - tags:
-      Name: eks-nodes
-  - tags:
-      Name: eks-dev
+    - tags:
+        Name: eks-nodes
+    - tags:
+        Name: eks-dev
   tags:
     cluster: eks-dev
     nodegroup: nodes-default
@@ -142,14 +143,14 @@ spec:
     team: devops
     managed_by: karpenter
   blockDeviceMappings:
-  - deviceName: /dev/xvda
-    ebs:
-      deleteOnTermination: true
-      encrypted: true
-      iops: 3000
-      throughput: 125
-      volumeSize: 100Gi
-      volumeType: gp3
+    - deviceName: /dev/xvda
+      ebs:
+        deleteOnTermination: true
+        encrypted: true
+        iops: 3000
+        throughput: 125
+        volumeSize: 100Gi
+        volumeType: gp3
   detailedMonitoring: false
   associatePublicIPAddress: false
   metadataOptions:
@@ -229,17 +230,17 @@ spec:
   amiFamily: AL2
   amiSelectorTerms:
   subnetSelectorTerms:
-  - tags:
-      Name: eks-dev-eu-west-1a
-  - tags:
-      Name: eks-dev-eu-west-1b
-  - tags:
-      Name: eks-dev-eu-west-1c
+    - tags:
+        Name: eks-dev-eu-west-1a
+    - tags:
+        Name: eks-dev-eu-west-1b
+    - tags:
+        Name: eks-dev-eu-west-1c
   securityGroupSelectorTerms:
-  - tags:
-      Name: eks-nodes
-  - tags:
-      Name: eks-dev
+    - tags:
+        Name: eks-nodes
+    - tags:
+        Name: eks-dev
   tags:
     cluster: eks-dev
     nodegroup: nodes-gpu
@@ -248,14 +249,14 @@ spec:
     team: devops
     managed_by: karpenter
   blockDeviceMappings:
-  - deviceName: /dev/xvda
-    ebs:
-      deleteOnTermination: true
-      encrypted: true
-      iops: 3000
-      throughput: 125
-      volumeSize: 100Gi
-      volumeType: gp3
+    - deviceName: /dev/xvda
+      ebs:
+        deleteOnTermination: true
+        encrypted: true
+        iops: 3000
+        throughput: 125
+        volumeSize: 100Gi
+        volumeType: gp3
   detailedMonitoring: false
   associatePublicIPAddress: false
   metadataOptions:
@@ -335,17 +336,17 @@ spec:
   amiFamily: AL2
   amiSelectorTerms:
   subnetSelectorTerms:
-  - tags:
-      Name: eks-dev-eu-west-1a
-  - tags:
-      Name: eks-dev-eu-west-1b
-  - tags:
-      Name: eks-dev-eu-west-1c
+    - tags:
+        Name: eks-dev-eu-west-1a
+    - tags:
+        Name: eks-dev-eu-west-1b
+    - tags:
+        Name: eks-dev-eu-west-1c
   securityGroupSelectorTerms:
-  - tags:
-      Name: eks-nodes
-  - tags:
-      Name: eks-dev
+    - tags:
+        Name: eks-nodes
+    - tags:
+        Name: eks-dev
   tags:
     cluster: eks-dev
     nodegroup: nodes-ingress
@@ -354,14 +355,14 @@ spec:
     team: devops
     managed_by: karpenter
   blockDeviceMappings:
-  - deviceName: /dev/xvda
-    ebs:
-      deleteOnTermination: true
-      encrypted: true
-      iops: 3000
-      throughput: 125
-      volumeSize: 100Gi
-      volumeType: gp3
+    - deviceName: /dev/xvda
+      ebs:
+        deleteOnTermination: true
+        encrypted: true
+        iops: 3000
+        throughput: 125
+        volumeSize: 100Gi
+        volumeType: gp3
   detailedMonitoring: false
   associatePublicIPAddress: false
   metadataOptions:
@@ -434,17 +435,17 @@ spec:
   amiFamily: AL2
   amiSelectorTerms:
   subnetSelectorTerms:
-  - tags:
-      Name: eks-dev-eu-west-1a
-  - tags:
-      Name: eks-dev-eu-west-1b
-  - tags:
-      Name: eks-dev-eu-west-1c
+    - tags:
+        Name: eks-dev-eu-west-1a
+    - tags:
+        Name: eks-dev-eu-west-1b
+    - tags:
+        Name: eks-dev-eu-west-1c
   securityGroupSelectorTerms:
-  - tags:
-      Name: eks-nodes
-  - tags:
-      Name: eks-dev
+    - tags:
+        Name: eks-nodes
+    - tags:
+        Name: eks-dev
   tags:
     cluster: eks-dev
     nodegroup: nodes-jobs
@@ -453,14 +454,14 @@ spec:
     team: devops
     managed_by: karpenter
   blockDeviceMappings:
-  - deviceName: /dev/xvda
-    ebs:
-      deleteOnTermination: true
-      encrypted: true
-      iops: 9000
-      throughput: 125
-      volumeSize: 500Gi
-      volumeType: gp3
+    - deviceName: /dev/xvda
+      ebs:
+        deleteOnTermination: true
+        encrypted: true
+        iops: 9000
+        throughput: 125
+        volumeSize: 500Gi
+        volumeType: gp3
   detailedMonitoring: false
   associatePublicIPAddress: false
   metadataOptions:
@@ -540,17 +541,17 @@ spec:
   amiFamily: AL2
   amiSelectorTerms:
   subnetSelectorTerms:
-  - tags:
-      Name: eks-dev-eu-west-1a
-  - tags:
-      Name: eks-dev-eu-west-1b
-  - tags:
-      Name: eks-dev-eu-west-1c
+    - tags:
+        Name: eks-dev-eu-west-1a
+    - tags:
+        Name: eks-dev-eu-west-1b
+    - tags:
+        Name: eks-dev-eu-west-1c
   securityGroupSelectorTerms:
-  - tags:
-      Name: eks-nodes
-  - tags:
-      Name: eks-dev
+    - tags:
+        Name: eks-nodes
+    - tags:
+        Name: eks-dev
   tags:
     cluster: eks-dev
     nodegroup: nodes-monitoring
@@ -560,14 +561,14 @@ spec:
     innercomponent: monitoring
     managed_by: karpenter
   blockDeviceMappings:
-  - deviceName: /dev/xvda
-    ebs:
-      deleteOnTermination: true
-      encrypted: true
-      iops: 3000
-      throughput: 125
-      volumeSize: 100Gi
-      volumeType: gp3
+    - deviceName: /dev/xvda
+      ebs:
+        deleteOnTermination: true
+        encrypted: true
+        iops: 3000
+        throughput: 125
+        volumeSize: 100Gi
+        volumeType: gp3
   detailedMonitoring: false
   associatePublicIPAddress: false
   metadataOptions:
@@ -647,17 +648,17 @@ spec:
   amiFamily: AL2
   amiSelectorTerms:
   subnetSelectorTerms:
-  - tags:
-      Name: eks-dev-eu-west-1a
-  - tags:
-      Name: eks-dev-eu-west-1b
-  - tags:
-      Name: eks-dev-eu-west-1c
+    - tags:
+        Name: eks-dev-eu-west-1a
+    - tags:
+        Name: eks-dev-eu-west-1b
+    - tags:
+        Name: eks-dev-eu-west-1c
   securityGroupSelectorTerms:
-  - tags:
-      Name: eks-nodes
-  - tags:
-      Name: eks-dev
+    - tags:
+        Name: eks-nodes
+    - tags:
+        Name: eks-dev
   tags:
     cluster: eks-dev
     nodegroup: nodes-workers
@@ -666,14 +667,14 @@ spec:
     team: devops
     managed_by: karpenter
   blockDeviceMappings:
-  - deviceName: /dev/xvda
-    ebs:
-      deleteOnTermination: true
-      encrypted: true
-      iops: 3000
-      throughput: 125
-      volumeSize: 100Gi
-      volumeType: gp3
+    - deviceName: /dev/xvda
+      ebs:
+        deleteOnTermination: true
+        encrypted: true
+        iops: 3000
+        throughput: 125
+        volumeSize: 100Gi
+        volumeType: gp3
   detailedMonitoring: false
   associatePublicIPAddress: false
   metadataOptions:
@@ -758,78 +759,78 @@ spec:
       nodeClassRef:
         name: nodes-canary-amd64
       taints:
-      - key: dedicated
-        effect: NoSchedule
-        value: nodes_canary
-      - key: dedicated
-        value: canary
-        effect: NoSchedule
+        - key: dedicated
+          effect: NoSchedule
+          value: nodes_canary
+        - key: dedicated
+          value: canary
+          effect: NoSchedule
       requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values:
-        - m
-        - r
-        - c
-      - key: "karpenter.k8s.aws/instance-cpu"
-        operator: In
-        values:
-        - "4"
-        - "8"
-        - "12"
-        - "16"
-        - "24"
-        - "32"
-        - "48"
-      - key: karpenter.k8s.aws/instance-generation
-        operator: Gt
-        values:
-        - "3"
-      - key: "topology.kubernetes.io/zone"
-        operator: In
-        values:
-        - eu-west-1a
-        - eu-west-1b
-        - eu-west-1c
-      - key: "kubernetes.io/arch"
-        operator: In
-        values:
-        - amd64
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values:
-        - spot
-      - key: kubernetes.io/os
-        operator: In
-        values:
-        - linux
-      - key: "karpenter.k8s.aws/instance-family"
-        operator: NotIn
-        values:
-        - c6a
-        - m6a
-        - r6a
-        - c5a
-        - m5a
-        - r5a
-        - c6ad
-        - m6ad
-        - r6ad
-        - m5ad
-        - r5ad
-        - r5ad
-      - key: "karpenter.k8s.aws/instance-size"
-        operator: NotIn
-        values:
-        - metal
-      - key: capacity-spread
-        operator: In
-        values:
-        - "1"
-        - "2"
-        - "3"
-        - "4"
-        - "5"
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values:
+          - m
+          - r
+          - c
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: In
+          values:
+          - "4"
+          - "8"
+          - "12"
+          - "16"
+          - "24"
+          - "32"
+          - "48"
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values:
+          - "3"
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values:
+          - eu-west-1a
+          - eu-west-1b
+          - eu-west-1c    
+        - key: "kubernetes.io/arch"
+          operator: In
+          values:
+          - amd64
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values:
+          - spot
+        - key: kubernetes.io/os
+          operator: In
+          values:
+          - linux
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: NotIn
+          values:
+          - c6a
+          - m6a
+          - r6a
+          - c5a
+          - m5a
+          - r5a
+          - c6ad
+          - m6ad
+          - r6ad
+          - m5ad
+          - r5ad
+          - r5ad
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: NotIn
+          values:
+          - metal
+        - key: capacity-spread
+          operator: In
+          values:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
       kubelet:
         systemReserved:
           cpu: 250m
@@ -877,70 +878,70 @@ spec:
       nodeClassRef:
         name: nodes-default-amd64
       requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values:
-        - m
-        - r
-      - key: "karpenter.k8s.aws/instance-cpu"
-        operator: In
-        values:
-        - "4"
-        - "8"
-        - "12"
-        - "16"
-        - "24"
-        - "32"
-        - "48"
-      - key: karpenter.k8s.aws/instance-generation
-        operator: Gt
-        values:
-        - "3"
-      - key: "topology.kubernetes.io/zone"
-        operator: In
-        values:
-        - eu-west-1a
-        - eu-west-1b
-        - eu-west-1c
-      - key: "kubernetes.io/arch"
-        operator: In
-        values:
-        - amd64
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values:
-        - spot
-      - key: kubernetes.io/os
-        operator: In
-        values:
-        - linux
-      - key: "karpenter.k8s.aws/instance-family"
-        operator: NotIn
-        values:
-        - c6a
-        - m6a
-        - r6a
-        - c5a
-        - m5a
-        - r5a
-        - c6ad
-        - m6ad
-        - r6ad
-        - m5ad
-        - r5ad
-        - r5ad
-      - key: "karpenter.k8s.aws/instance-size"
-        operator: NotIn
-        values:
-        - metal
-      - key: capacity-spread
-        operator: In
-        values:
-        - "1"
-        - "2"
-        - "3"
-        - "4"
-        - "5"
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values:
+          - m
+          - r
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: In
+          values:
+          - "4"
+          - "8"
+          - "12"
+          - "16"
+          - "24"
+          - "32"
+          - "48"
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values:
+          - "3"
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values:
+          - eu-west-1a
+          - eu-west-1b
+          - eu-west-1c    
+        - key: "kubernetes.io/arch"
+          operator: In
+          values:
+          - amd64
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values:
+          - spot
+        - key: kubernetes.io/os
+          operator: In
+          values:
+          - linux
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: NotIn
+          values:
+          - c6a
+          - m6a
+          - r6a
+          - c5a
+          - m5a
+          - r5a
+          - c6ad
+          - m6ad
+          - r6ad
+          - m5ad
+          - r5ad
+          - r5ad
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: NotIn
+          values:
+          - metal
+        - key: capacity-spread
+          operator: In
+          values:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
       kubelet:
         systemReserved:
           cpu: 250m
@@ -988,66 +989,66 @@ spec:
       nodeClassRef:
         name: nodes-default-amd64
       requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values:
-        - m
-        - r
-      - key: "karpenter.k8s.aws/instance-cpu"
-        operator: In
-        values:
-        - "4"
-        - "8"
-        - "12"
-        - "16"
-        - "24"
-        - "32"
-        - "48"
-      - key: karpenter.k8s.aws/instance-generation
-        operator: Gt
-        values:
-        - "4"
-      - key: "topology.kubernetes.io/zone"
-        operator: In
-        values:
-        - eu-west-1a
-        - eu-west-1b
-        - eu-west-1c
-      - key: "kubernetes.io/arch"
-        operator: In
-        values:
-        - amd64
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values:
-        - on-demand
-      - key: kubernetes.io/os
-        operator: In
-        values:
-        - linux
-      - key: "karpenter.k8s.aws/instance-family"
-        operator: NotIn
-        values:
-        - c6a
-        - m6a
-        - r6a
-        - c5a
-        - m5a
-        - r5a
-        - c6ad
-        - m6ad
-        - r6ad
-        - m5ad
-        - r5ad
-        - r5ad
-      - key: "karpenter.k8s.aws/instance-size"
-        operator: NotIn
-        values:
-        - metal
-      - key: capacity-spread
-        operator: In
-        values:
-        - "6"
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values:
+          - m
+          - r
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: In
+          values:
+          - "4"
+          - "8"
+          - "12"
+          - "16"
+          - "24"
+          - "32"
+          - "48"
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values:
+          - "4"
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values:
+          - eu-west-1a
+          - eu-west-1b
+          - eu-west-1c    
+        - key: "kubernetes.io/arch"
+          operator: In
+          values:
+          - amd64
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values:
+          - on-demand
+        - key: kubernetes.io/os
+          operator: In
+          values:
+          - linux
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: NotIn
+          values:
+          - c6a
+          - m6a
+          - r6a
+          - c5a
+          - m5a
+          - r5a
+          - c6ad
+          - m6ad
+          - r6ad
+          - m5ad
+          - r5ad
+          - r5ad
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: NotIn
+          values:
+          - metal
+        - key: capacity-spread
+          operator: In
+          values:
+            - "6"
       kubelet:
         systemReserved:
           cpu: 250m
@@ -1096,56 +1097,56 @@ spec:
       nodeClassRef:
         name: nodes-gpu-amd64
       taints:
-      - key: dedicated
-        effect: NoSchedule
-        value: nodes_gpu
-      - key: dedicated
-        value: gpu
-        effect: NoSchedule
+        - key: dedicated
+          effect: NoSchedule
+          value: nodes_gpu
+        - key: dedicated
+          value: gpu
+          effect: NoSchedule
       requirements:
-      - key: "topology.kubernetes.io/zone"
-        operator: In
-        values:
-        - eu-west-1a
-        - eu-west-1b
-        - eu-west-1c
-      - key: "kubernetes.io/arch"
-        operator: In
-        values:
-        - amd64
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values:
-        - spot
-      - key: kubernetes.io/os
-        operator: In
-        values:
-        - linux
-      - key: "karpenter.k8s.aws/instance-family"
-        operator: NotIn
-        values:
-        - c6a
-        - m6a
-        - r6a
-        - c5a
-        - m5a
-        - r5a
-        - c6ad
-        - m6ad
-        - r6ad
-        - m5ad
-        - r5ad
-        - r5ad
-      - key: "karpenter.k8s.aws/instance-size"
-        operator: NotIn
-        values:
-        - metal
-      - key: node.kubernetes.io/instance-type
-        operator: In
-        values:
-        - g5.xlarge
-        - g5.2xlarge
-        - g5.4xlarge
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values:
+          - eu-west-1a
+          - eu-west-1b
+          - eu-west-1c    
+        - key: "kubernetes.io/arch"
+          operator: In
+          values:
+          - amd64
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values:
+          - spot
+        - key: kubernetes.io/os
+          operator: In
+          values:
+          - linux
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: NotIn
+          values:
+          - c6a
+          - m6a
+          - r6a
+          - c5a
+          - m5a
+          - r5a
+          - c6ad
+          - m6ad
+          - r6ad
+          - m5ad
+          - r5ad
+          - r5ad
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: NotIn
+          values:
+          - metal
+        - key: node.kubernetes.io/instance-type
+          operator: In
+          values:
+            - g5.xlarge
+            - g5.2xlarge
+            - g5.4xlarge
       kubelet:
         systemReserved:
           cpu: 250m
@@ -1195,65 +1196,65 @@ spec:
       nodeClassRef:
         name: nodes-ingress-multiarch
       taints:
-      - key: dedicated
-        effect: NoSchedule
-        value: nodes_ingress
-      - key: dedicated
-        value: ingress
-        effect: NoSchedule
+        - key: dedicated
+          effect: NoSchedule
+          value: nodes_ingress
+        - key: dedicated
+          value: ingress
+          effect: NoSchedule
       requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values:
-        - m
-        - r
-        - c
-      - key: "karpenter.k8s.aws/instance-cpu"
-        operator: In
-        values:
-        - "8"
-      - key: karpenter.k8s.aws/instance-generation
-        operator: Gt
-        values:
-        - "6"
-      - key: "topology.kubernetes.io/zone"
-        operator: In
-        values:
-        - eu-west-1a
-        - eu-west-1b
-        - eu-west-1c
-      - key: "kubernetes.io/arch"
-        operator: In
-        values:
-        - amd64
-        - arm64
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values:
-        - on-demand
-      - key: kubernetes.io/os
-        operator: In
-        values:
-        - linux
-      - key: "karpenter.k8s.aws/instance-family"
-        operator: NotIn
-        values:
-        - c6a
-        - m6a
-        - r6a
-        - c5a
-        - m5a
-        - r5a
-        - c6ad
-        - m6ad
-        - r6ad
-        - m5ad
-        - r5ad
-        - r5ad
-      - key: "karpenter.k8s.aws/instance-size"
-        operator: NotIn
-        values:
-        - metal
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values:
+          - m
+          - r
+          - c
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: In
+          values:
+          - "8"
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values:
+          - "6"
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values:
+          - eu-west-1a
+          - eu-west-1b
+          - eu-west-1c    
+        - key: "kubernetes.io/arch"
+          operator: In
+          values:
+          - amd64
+          - arm64
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values:
+          - on-demand
+        - key: kubernetes.io/os
+          operator: In
+          values:
+          - linux
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: NotIn
+          values:
+          - c6a
+          - m6a
+          - r6a
+          - c5a
+          - m5a
+          - r5a
+          - c6ad
+          - m6ad
+          - r6ad
+          - m5ad
+          - r5ad
+          - r5ad
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: NotIn
+          values:
+          - metal
       kubelet:
         systemReserved:
           cpu: 250m
@@ -1301,65 +1302,65 @@ spec:
       nodeClassRef:
         name: nodes-jobs-amd64
       taints:
-      - key: dedicated
-        effect: NoSchedule
-        value: nodes_jobs
-      - key: dedicated
-        value: jobs
-        effect: NoSchedule
+        - key: dedicated
+          effect: NoSchedule
+          value: nodes_jobs
+        - key: dedicated
+          value: jobs
+          effect: NoSchedule
       requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values:
-        - m
-        - r
-        - c
-      - key: "karpenter.k8s.aws/instance-cpu"
-        operator: In
-        values:
-        - "8"
-        - "16"
-      - key: karpenter.k8s.aws/instance-generation
-        operator: Gt
-        values:
-        - "3"
-      - key: "topology.kubernetes.io/zone"
-        operator: In
-        values:
-        - eu-west-1a
-        - eu-west-1b
-        - eu-west-1c
-      - key: "kubernetes.io/arch"
-        operator: In
-        values:
-        - amd64
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values:
-        - on-demand
-      - key: kubernetes.io/os
-        operator: In
-        values:
-        - linux
-      - key: "karpenter.k8s.aws/instance-family"
-        operator: NotIn
-        values:
-        - c6a
-        - m6a
-        - r6a
-        - c5a
-        - m5a
-        - r5a
-        - c6ad
-        - m6ad
-        - r6ad
-        - m5ad
-        - r5ad
-        - r5ad
-      - key: "karpenter.k8s.aws/instance-size"
-        operator: NotIn
-        values:
-        - metal
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values:
+          - m
+          - r
+          - c
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: In
+          values:
+          - "8"
+          - "16"
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values:
+          - "3"
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values:
+          - eu-west-1a
+          - eu-west-1b
+          - eu-west-1c    
+        - key: "kubernetes.io/arch"
+          operator: In
+          values:
+          - amd64
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values:
+          - on-demand
+        - key: kubernetes.io/os
+          operator: In
+          values:
+          - linux
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: NotIn
+          values:
+          - c6a
+          - m6a
+          - r6a
+          - c5a
+          - m5a
+          - r5a
+          - c6ad
+          - m6ad
+          - r6ad
+          - m5ad
+          - r5ad
+          - r5ad
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: NotIn
+          values:
+          - metal
       kubelet:
         systemReserved:
           cpu: 250m
@@ -1409,60 +1410,60 @@ spec:
       nodeClassRef:
         name: nodes-monitoring-multiarch
       taints:
-      - key: dedicated
-        effect: NoSchedule
-        value: nodes_monitoring
-      - key: dedicated
-        value: monitoring
-        effect: NoSchedule
+        - key: dedicated
+          effect: NoSchedule
+          value: nodes_monitoring
+        - key: dedicated
+          value: monitoring
+          effect: NoSchedule
       requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values:
-        - m
-        - r
-        - c
-      - key: "karpenter.k8s.aws/instance-cpu"
-        operator: In
-        values:
-        - "4"
-        - "8"
-        - "12"
-        - "16"
-        - "24"
-        - "32"
-        - "48"
-      - key: karpenter.k8s.aws/instance-generation
-        operator: Gt
-        values:
-        - "3"
-      - key: "topology.kubernetes.io/zone"
-        operator: In
-        values:
-        - eu-west-1a
-        - eu-west-1b
-        - eu-west-1c
-      - key: "kubernetes.io/arch"
-        operator: In
-        values:
-        - amd64
-        - arm64
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values:
-        - on-demand
-      - key: kubernetes.io/os
-        operator: In
-        values:
-        - linux
-      - key: "karpenter.k8s.aws/instance-family"
-        operator: NotIn
-        values:
-        - x1
-      - key: "karpenter.k8s.aws/instance-size"
-        operator: NotIn
-        values:
-        - metal
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values:
+          - m
+          - r
+          - c
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: In
+          values:
+          - "4"
+          - "8"
+          - "12"
+          - "16"
+          - "24"
+          - "32"
+          - "48"
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values:
+          - "3"
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values:
+          - eu-west-1a
+          - eu-west-1b
+          - eu-west-1c    
+        - key: "kubernetes.io/arch"
+          operator: In
+          values:
+          - amd64
+          - arm64
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values:
+          - on-demand
+        - key: kubernetes.io/os
+          operator: In
+          values:
+          - linux
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: NotIn
+          values:
+          - x1
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: NotIn
+          values:
+          - metal
       kubelet:
         systemReserved:
           cpu: 250m
@@ -1510,74 +1511,74 @@ spec:
       nodeClassRef:
         name: nodes-workers-amd64
       taints:
-      - key: dedicated
-        effect: NoSchedule
-        value: nodes_workers
+        - key: dedicated
+          effect: NoSchedule
+          value: nodes_workers
       requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values:
-        - m
-        - r
-      - key: "karpenter.k8s.aws/instance-cpu"
-        operator: In
-        values:
-        - "4"
-        - "8"
-        - "12"
-        - "16"
-        - "24"
-        - "32"
-        - "48"
-      - key: karpenter.k8s.aws/instance-generation
-        operator: Gt
-        values:
-        - "3"
-      - key: "topology.kubernetes.io/zone"
-        operator: In
-        values:
-        - eu-west-1a
-        - eu-west-1b
-        - eu-west-1c
-      - key: "kubernetes.io/arch"
-        operator: In
-        values:
-        - amd64
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values:
-        - spot
-      - key: kubernetes.io/os
-        operator: In
-        values:
-        - linux
-      - key: "karpenter.k8s.aws/instance-family"
-        operator: NotIn
-        values:
-        - c6a
-        - m6a
-        - r6a
-        - c5a
-        - m5a
-        - r5a
-        - c6ad
-        - m6ad
-        - r6ad
-        - m5ad
-        - r5ad
-        - r5ad
-      - key: "karpenter.k8s.aws/instance-size"
-        operator: NotIn
-        values:
-        - metal
-      - key: capacity-spread
-        operator: In
-        values:
-        - "1"
-        - "2"
-        - "3"
-        - "4"
-        - "5"
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values:
+          - m
+          - r
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: In
+          values:
+          - "4"
+          - "8"
+          - "12"
+          - "16"
+          - "24"
+          - "32"
+          - "48"
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values:
+          - "3"
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values:
+          - eu-west-1a
+          - eu-west-1b
+          - eu-west-1c    
+        - key: "kubernetes.io/arch"
+          operator: In
+          values:
+          - amd64
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values:
+          - spot
+        - key: kubernetes.io/os
+          operator: In
+          values:
+          - linux
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: NotIn
+          values:
+          - c6a
+          - m6a
+          - r6a
+          - c5a
+          - m5a
+          - r5a
+          - c6ad
+          - m6ad
+          - r6ad
+          - m5ad
+          - r5ad
+          - r5ad
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: NotIn
+          values:
+          - metal
+        - key: capacity-spread
+          operator: In
+          values:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
       kubelet:
         systemReserved:
           cpu: 250m
@@ -1625,73 +1626,73 @@ spec:
       nodeClassRef:
         name: nodes-workers-amd64
       taints:
-      - key: dedicated
-        effect: NoSchedule
-        value: nodes_workers
+        - key: dedicated
+          effect: NoSchedule
+          value: nodes_workers
       requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values:
-        - c
-      - key: "karpenter.k8s.aws/instance-cpu"
-        operator: In
-        values:
-        - "4"
-        - "8"
-        - "12"
-        - "16"
-        - "24"
-        - "32"
-        - "48"
-      - key: karpenter.k8s.aws/instance-generation
-        operator: Gt
-        values:
-        - "3"
-      - key: "topology.kubernetes.io/zone"
-        operator: In
-        values:
-        - eu-west-1a
-        - eu-west-1b
-        - eu-west-1c
-      - key: "kubernetes.io/arch"
-        operator: In
-        values:
-        - amd64
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values:
-        - spot
-      - key: kubernetes.io/os
-        operator: In
-        values:
-        - linux
-      - key: "karpenter.k8s.aws/instance-family"
-        operator: NotIn
-        values:
-        - c6a
-        - m6a
-        - r6a
-        - c5a
-        - m5a
-        - r5a
-        - c6ad
-        - m6ad
-        - r6ad
-        - m5ad
-        - r5ad
-        - r5ad
-      - key: "karpenter.k8s.aws/instance-size"
-        operator: NotIn
-        values:
-        - metal
-      - key: capacity-spread
-        operator: In
-        values:
-        - "1"
-        - "2"
-        - "3"
-        - "4"
-        - "5"
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values:
+          - c
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: In
+          values:
+          - "4"
+          - "8"
+          - "12"
+          - "16"
+          - "24"
+          - "32"
+          - "48"
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values:
+          - "3"
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values:
+          - eu-west-1a
+          - eu-west-1b
+          - eu-west-1c    
+        - key: "kubernetes.io/arch"
+          operator: In
+          values:
+          - amd64
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values:
+          - spot
+        - key: kubernetes.io/os
+          operator: In
+          values:
+          - linux
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: NotIn
+          values:
+          - c6a
+          - m6a
+          - r6a
+          - c5a
+          - m5a
+          - r5a
+          - c6ad
+          - m6ad
+          - r6ad
+          - m5ad
+          - r5ad
+          - r5ad
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: NotIn
+          values:
+          - metal
+        - key: capacity-spread
+          operator: In
+          values:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
       kubelet:
         systemReserved:
           cpu: 250m
