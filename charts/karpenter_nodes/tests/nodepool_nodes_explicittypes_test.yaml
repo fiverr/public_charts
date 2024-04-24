@@ -52,4 +52,3 @@ tests:
           value: t3a.xlarge
       - isNull:
           path: spec.template.spec.requirements[6]
-      
