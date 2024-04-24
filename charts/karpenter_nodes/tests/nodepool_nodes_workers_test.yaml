@@ -6,7 +6,7 @@ values:
 
 tests:
   - it: Verify nodes-workers metadata
-    documentIndex: 2
+    documentIndex: 3
     asserts:
       - isKind:
           of: NodePool
@@ -60,7 +60,7 @@ tests:
 
 
   - it: Verify nodes-workers requirements
-    documentIndex: 2
+    documentIndex: 3
     asserts:
       - equal:
           path: spec.template.spec.requirements[0].key
@@ -162,7 +162,7 @@ tests:
 
 
   - it: Verify nodes-workers kubelet
-    documentIndex: 2
+    documentIndex: 3
     asserts:
       - equal:
           path: spec.template.spec.kubelet.systemReserved.cpu
@@ -178,7 +178,7 @@ tests:
           value: "2.2.2.2"
 
   - it: Verify nodes-workers Options
-    documentIndex: 2
+    documentIndex: 3
     asserts:
       - equal:
           path: spec.disruption.expireAfter

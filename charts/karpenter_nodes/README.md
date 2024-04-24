@@ -63,6 +63,7 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 | `instances.cores`              | Allowed cores per instance (`"4"`, `"8"`) | `List(String(int))` | x | ✓ |
 | `instances.capacityType`       | `spot`, `on-demand` (can use both on single provisioner) | `List(String)` | x | ✓ |
 | `instances.operatingSystems`   | Allowed operating systems (`"linux"`, `"windows"`) | `List(String)` | x | ✓ |
+| `instances.instanceTypes`                | Explicit list of instance types to use (ie `m7i.xlarge`) This will ignore all sizing related requirements | `List(String)` | x | ✓ |
 | `availabilityZones`            | Availability Zones to use | `List(String)` | x | ✓ |
 | `expireAfter`                  | Specify how long node should be up before refreshing it [Documentation](https://karpenter.sh/docs/concepts/disruption/#automated-methods) | `String` | x | ✓ |
 | `weight`                       | Specify NodeGroup Weight (default is `1`) | `Integer` | x | ✓ |

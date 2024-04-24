@@ -6,7 +6,7 @@ values:
 
 tests:
   - it: Verify nodes-noclass metadata
-    documentIndex: 1
+    documentIndex: 2
     asserts:
       - isKind:
           of: NodePool
@@ -24,7 +24,7 @@ tests:
           value: default
 
   - it: Verify nodes-noclass requirements
-    documentIndex: 1
+    documentIndex: 2
     asserts:
       - equal:
           path: spec.template.spec.requirements[0].key
