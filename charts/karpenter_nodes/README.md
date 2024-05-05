@@ -74,6 +74,8 @@ Note - Most of the values can be overridden per nodegroup (If not specified, it 
 | `headRoom`                     | Generate Ultra Low Priority Class for Headroom (see below) | `String` | ✓ | x |
 | `additionalRequirements`       | add NodePool requirements which are not covered by this chart | `List(map)` | ✓ | ✓ |
 | `autoTaint`                    | add NodePool taint with `dedicated` as key and nodegroup name as value (`-` replaced with `_`) | `Boolean(String)` | ✓ | ✓ |
+| `cilium`                       | Add startupTaints for Cilium | `Boolean` | ✓ | ✓ |
+| `ciliumEffect`                 | Set Effect on CiliumStartupTaint (Default `NoExecute`) [Documentation](https://docs.cilium.io/en/stable/installation/taints/) | `String` | ✓ | ✓ |
 
 ### NodeGroup Configuration
 |  Key Name                      | Description | Type | Optional? | Optional Per NodeGroup? |
