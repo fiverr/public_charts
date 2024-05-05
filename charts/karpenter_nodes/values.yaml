@@ -142,4 +142,4 @@ nodeGroups: {}
 #    operator: "Exists"
 
 cilium: false
-ciliumEffect: "NoExecute" # "NoSchedule"
+ciliumEffect: "NoExecute"    # "NoSchedule"
