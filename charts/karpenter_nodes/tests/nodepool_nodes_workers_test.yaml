@@ -58,7 +58,6 @@ tests:
           path: spec.template.spec.taints[0].effect
           value: NoSchedule
 
-
   - it: Verify nodes-workers requirements
     documentIndex: 3
     asserts:
@@ -210,4 +209,3 @@ tests:
       - equal:
           path: spec.weight
           value: 3
-

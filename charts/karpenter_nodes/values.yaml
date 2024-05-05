@@ -140,3 +140,6 @@ nodeGroups: {}
 # additionalRequirements:
 #  - key: "karpenter.k8s.aws/instance-local-nvme"
 #    operator: "Exists"
+
+cilium: false
+ciliumEffect: "NoExecute" # "NoSchedule"

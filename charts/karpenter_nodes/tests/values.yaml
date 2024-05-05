@@ -25,6 +25,8 @@ nodeGroups:
     instances: {}
     nodeClassRef:
       name: default
+    cilium: true
+    ciliumEffect: "NoSchedule"
 
   nodes-workers:
     additionalNodeTags:
@@ -137,6 +139,7 @@ nodeGroups:
       - t3a.xlarge
     nodeClassRef:
       name: default
+    cilium: true
 
 #Default cluster Settings
 clusterName: "eks-dev"

@@ -43,12 +43,19 @@ spec:
         {{- end }}
         {{- end }}
       {{- end }}
-      {{- if hasKey $v "startupTaints" }}
+      {{- if or (hasKey $v "startupTaints") ($v.cilium | default $.Values.cilium) }}
       startupTaints:
-        {{- range $v.startupTaints }}
+        {{- if hasKey $v "startupTaints" }}
+          {{- range $v.startupTaints }}
         - key: {{ .key }}
           value: {{ .value }}
           effect: {{ .effect }}
+          {{- end }}
+        {{- end }}
+        {{- if $v.cilium | default $.Values.cilium }}
+        - key: node.cilium.io/agent-not-ready
+          value: "true"
+          effect: {{ $v.ciliumEffect | default $.Values.ciliumEffect }}
         {{- end }}
       {{- end }}
       requirements:
