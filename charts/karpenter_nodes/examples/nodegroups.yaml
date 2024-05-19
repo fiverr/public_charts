@@ -48,10 +48,6 @@ nodeGroups:
     capacitySpread:
       start: 1
       end: 5
-    taints:
-      - key: "dedicated"
-        value: "canary"
-        effect: "NoSchedule"
   nodes-jobs:
     expireAfter: "Never"
     instances:
@@ -61,10 +57,6 @@ nodeGroups:
         - "8"
         - "16"
     consolidationPolicy: "WhenEmpty"
-    taints:
-      - key: "dedicated"
-        value: "jobs"
-        effect: "NoSchedule"
     blockDeviceMappings:
       - deviceName: /dev/xvda
         ebs:
@@ -84,10 +76,6 @@ nodeGroups:
       minGeneration: 7
       cores:
         - "8"
-    taints:
-      - key: "dedicated"
-        value: "ingress"
-        effect: "NoSchedule"
   nodes-monitoring:
     labels:
       prometheus-scrape: "true" #Not Real Use-case
@@ -98,12 +86,7 @@ nodeGroups:
       architecture: "multiarch"
       capacityType:
         - on-demand
-    taints:
-      - key: "dedicated"
-        value: "monitoring"
-        effect: "NoSchedule"
-    excludeFamilies:
-    - x1 #We dont have X in our types but i do want it to not exclude previously defined amd instances
+    excludeFamilies: []
   nodes-gpu:
     labels:
       gpu: "true"
@@ -120,8 +103,6 @@ nodeGroups:
       - key: "dedicated"
         value: "gpu"
         effect: "NoSchedule"
-
-
-
-
-
+  nodes-cilium-managed:
+    instances: {}
+    cilium: true
