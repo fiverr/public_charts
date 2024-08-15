@@ -151,8 +151,8 @@ spec:
         {{- if or (hasKey $.Values "additionalRequirements") (hasKey $v "additionalRequirements") }}
         {{- toYaml ($v.additionalRequirements | default $.Values.additionalRequirements) | nindent 8 }}
         {{- end }}
+      expireAfter: {{ $v.expireAfter | default $.Values.expireAfter }}
   disruption:
-    expireAfter: {{ $v.expireAfter | default $.Values.expireAfter }}
     consolidationPolicy: {{$v.consolidationPolicy | default $.Values.consolidationPolicy}}
     {{- if eq ($v.consolidationPolicy | default $.Values.consolidationPolicy) "WhenEmpty" }}
     consolidateAfter: {{ $v.consolidateAfter | default $.Values.consolidateAfter }}

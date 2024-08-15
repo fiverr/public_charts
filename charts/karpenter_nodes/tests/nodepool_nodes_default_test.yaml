@@ -131,7 +131,7 @@ tests:
     documentIndex: 0
     asserts:
       - equal:
-          path: spec.disruption.expireAfter
+          path: spec.template.spec.expireAfter
           value: 720h
       - equal:
           path: spec.disruption.consolidationPolicy
