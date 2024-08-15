@@ -53,32 +53,32 @@ spec:
     httpPutResponseHopLimit: 2
     httpTokens: required
   kubelet:
-  systemReserved:
-      cpu: 250m
-      memory: 200Mi
-      ephemeral-storage: 2Gi
-  kubeReserved:
-      cpu: 250m
-      memory: 1Gi
-      ephemeral-storage: 4Gi
-  evictionHard:
-      memory.available: 768Mi
-      nodefs.available: 8%
-      nodefs.inodesFree: 8%
-  evictionSoft:
-      memory.available: 1280Mi
-      nodefs.available: 10%
-      nodefs.inodesFree: 15%
-      imagefs.available: 10%
-      imagefs.inodesFree: 10%
-      pid.available: 10%
-  evictionSoftGracePeriod:
-      imagefs.available: 10m0s
-      imagefs.inodesFree: 10m0s
-      memory.available: 5m0s
-      nodefs.available: 10m0s
-      nodefs.inodesFree: 10m0s
-      pid.available: 2m0s
+    systemReserved:
+        cpu: 250m
+        memory: 200Mi
+        ephemeral-storage: 2Gi
+    kubeReserved:
+        cpu: 250m
+        memory: 1Gi
+        ephemeral-storage: 4Gi
+    evictionHard:
+        memory.available: 768Mi
+        nodefs.available: 8%
+        nodefs.inodesFree: 8%
+    evictionSoft:
+        memory.available: 1280Mi
+        nodefs.available: 10%
+        nodefs.inodesFree: 15%
+        imagefs.available: 10%
+        imagefs.inodesFree: 10%
+        pid.available: 10%
+    evictionSoftGracePeriod:
+        imagefs.available: 10m0s
+        imagefs.inodesFree: 10m0s
+        memory.available: 5m0s
+        nodefs.available: 10m0s
+        nodefs.inodesFree: 10m0s
+        pid.available: 2m0s
   userData: |
     CLUSTER_NAME=eks-dev
     INSTANCEGROUP=nodes-canary
@@ -186,32 +186,32 @@ spec:
     httpPutResponseHopLimit: 2
     httpTokens: required
   kubelet:
-  systemReserved:
-      cpu: 250m
-      memory: 200Mi
-      ephemeral-storage: 2Gi
-  kubeReserved:
-      cpu: 250m
-      memory: 1Gi
-      ephemeral-storage: 4Gi
-  evictionHard:
-      memory.available: 768Mi
-      nodefs.available: 8%
-      nodefs.inodesFree: 8%
-  evictionSoft:
-      memory.available: 1280Mi
-      nodefs.available: 10%
-      nodefs.inodesFree: 15%
-      imagefs.available: 10%
-      imagefs.inodesFree: 10%
-      pid.available: 10%
-  evictionSoftGracePeriod:
-      imagefs.available: 10m0s
-      imagefs.inodesFree: 10m0s
-      memory.available: 5m0s
-      nodefs.available: 10m0s
-      nodefs.inodesFree: 10m0s
-      pid.available: 2m0s
+    systemReserved:
+        cpu: 250m
+        memory: 200Mi
+        ephemeral-storage: 2Gi
+    kubeReserved:
+        cpu: 250m
+        memory: 1Gi
+        ephemeral-storage: 4Gi
+    evictionHard:
+        memory.available: 768Mi
+        nodefs.available: 8%
+        nodefs.inodesFree: 8%
+    evictionSoft:
+        memory.available: 1280Mi
+        nodefs.available: 10%
+        nodefs.inodesFree: 15%
+        imagefs.available: 10%
+        imagefs.inodesFree: 10%
+        pid.available: 10%
+    evictionSoftGracePeriod:
+        imagefs.available: 10m0s
+        imagefs.inodesFree: 10m0s
+        memory.available: 5m0s
+        nodefs.available: 10m0s
+        nodefs.inodesFree: 10m0s
+        pid.available: 2m0s
   userData: |
     CLUSTER_NAME=eks-dev
     INSTANCEGROUP=nodes-cilium-managed
@@ -319,32 +319,32 @@ spec:
     httpPutResponseHopLimit: 2
     httpTokens: required
   kubelet:
-  systemReserved:
-      cpu: 250m
-      memory: 200Mi
-      ephemeral-storage: 2Gi
-  kubeReserved:
-      cpu: 250m
-      memory: 1Gi
-      ephemeral-storage: 4Gi
-  evictionHard:
-      memory.available: 768Mi
-      nodefs.available: 8%
-      nodefs.inodesFree: 8%
-  evictionSoft:
-      memory.available: 1280Mi
-      nodefs.available: 10%
-      nodefs.inodesFree: 15%
-      imagefs.available: 10%
-      imagefs.inodesFree: 10%
-      pid.available: 10%
-  evictionSoftGracePeriod:
-      imagefs.available: 10m0s
-      imagefs.inodesFree: 10m0s
-      memory.available: 5m0s
-      nodefs.available: 10m0s
-      nodefs.inodesFree: 10m0s
-      pid.available: 2m0s
+    systemReserved:
+        cpu: 250m
+        memory: 200Mi
+        ephemeral-storage: 2Gi
+    kubeReserved:
+        cpu: 250m
+        memory: 1Gi
+        ephemeral-storage: 4Gi
+    evictionHard:
+        memory.available: 768Mi
+        nodefs.available: 8%
+        nodefs.inodesFree: 8%
+    evictionSoft:
+        memory.available: 1280Mi
+        nodefs.available: 10%
+        nodefs.inodesFree: 15%
+        imagefs.available: 10%
+        imagefs.inodesFree: 10%
+        pid.available: 10%
+    evictionSoftGracePeriod:
+        imagefs.available: 10m0s
+        imagefs.inodesFree: 10m0s
+        memory.available: 5m0s
+        nodefs.available: 10m0s
+        nodefs.inodesFree: 10m0s
+        pid.available: 2m0s
   userData: |
     CLUSTER_NAME=eks-dev
     INSTANCEGROUP=nodes-default
@@ -452,32 +452,32 @@ spec:
     httpPutResponseHopLimit: 2
     httpTokens: required
   kubelet:
-  systemReserved:
-      cpu: 250m
-      memory: 200Mi
-      ephemeral-storage: 2Gi
-  kubeReserved:
-      cpu: 250m
-      memory: 1Gi
-      ephemeral-storage: 4Gi
-  evictionHard:
-      memory.available: 768Mi
-      nodefs.available: 8%
-      nodefs.inodesFree: 8%
-  evictionSoft:
-      memory.available: 1280Mi
-      nodefs.available: 10%
-      nodefs.inodesFree: 15%
-      imagefs.available: 10%
-      imagefs.inodesFree: 10%
-      pid.available: 10%
-  evictionSoftGracePeriod:
-      imagefs.available: 10m0s
-      imagefs.inodesFree: 10m0s
-      memory.available: 5m0s
-      nodefs.available: 10m0s
-      nodefs.inodesFree: 10m0s
-      pid.available: 2m0s
+    systemReserved:
+        cpu: 250m
+        memory: 200Mi
+        ephemeral-storage: 2Gi
+    kubeReserved:
+        cpu: 250m
+        memory: 1Gi
+        ephemeral-storage: 4Gi
+    evictionHard:
+        memory.available: 768Mi
+        nodefs.available: 8%
+        nodefs.inodesFree: 8%
+    evictionSoft:
+        memory.available: 1280Mi
+        nodefs.available: 10%
+        nodefs.inodesFree: 15%
+        imagefs.available: 10%
+        imagefs.inodesFree: 10%
+        pid.available: 10%
+    evictionSoftGracePeriod:
+        imagefs.available: 10m0s
+        imagefs.inodesFree: 10m0s
+        memory.available: 5m0s
+        nodefs.available: 10m0s
+        nodefs.inodesFree: 10m0s
+        pid.available: 2m0s
   userData: |
     CLUSTER_NAME=eks-dev
     INSTANCEGROUP=nodes-gpu
@@ -585,32 +585,32 @@ spec:
     httpPutResponseHopLimit: 2
     httpTokens: required
   kubelet:
-  systemReserved:
-      cpu: 250m
-      memory: 200Mi
-      ephemeral-storage: 2Gi
-  kubeReserved:
-      cpu: 250m
-      memory: 1Gi
-      ephemeral-storage: 4Gi
-  evictionHard:
-      memory.available: 768Mi
-      nodefs.available: 8%
-      nodefs.inodesFree: 8%
-  evictionSoft:
-      memory.available: 1280Mi
-      nodefs.available: 10%
-      nodefs.inodesFree: 15%
-      imagefs.available: 10%
-      imagefs.inodesFree: 10%
-      pid.available: 10%
-  evictionSoftGracePeriod:
-      imagefs.available: 10m0s
-      imagefs.inodesFree: 10m0s
-      memory.available: 5m0s
-      nodefs.available: 10m0s
-      nodefs.inodesFree: 10m0s
-      pid.available: 2m0s
+    systemReserved:
+        cpu: 250m
+        memory: 200Mi
+        ephemeral-storage: 2Gi
+    kubeReserved:
+        cpu: 250m
+        memory: 1Gi
+        ephemeral-storage: 4Gi
+    evictionHard:
+        memory.available: 768Mi
+        nodefs.available: 8%
+        nodefs.inodesFree: 8%
+    evictionSoft:
+        memory.available: 1280Mi
+        nodefs.available: 10%
+        nodefs.inodesFree: 15%
+        imagefs.available: 10%
+        imagefs.inodesFree: 10%
+        pid.available: 10%
+    evictionSoftGracePeriod:
+        imagefs.available: 10m0s
+        imagefs.inodesFree: 10m0s
+        memory.available: 5m0s
+        nodefs.available: 10m0s
+        nodefs.inodesFree: 10m0s
+        pid.available: 2m0s
   userData: |
     CLUSTER_NAME=eks-dev
     INSTANCEGROUP=nodes-ingress
@@ -711,32 +711,32 @@ spec:
     httpPutResponseHopLimit: 2
     httpTokens: required
   kubelet:
-  systemReserved:
-      cpu: 250m
-      memory: 200Mi
-      ephemeral-storage: 2Gi
-  kubeReserved:
-      cpu: 250m
-      memory: 1Gi
-      ephemeral-storage: 4Gi
-  evictionHard:
-      memory.available: 768Mi
-      nodefs.available: 8%
-      nodefs.inodesFree: 8%
-  evictionSoft:
-      memory.available: 1280Mi
-      nodefs.available: 10%
-      nodefs.inodesFree: 15%
-      imagefs.available: 10%
-      imagefs.inodesFree: 10%
-      pid.available: 10%
-  evictionSoftGracePeriod:
-      imagefs.available: 10m0s
-      imagefs.inodesFree: 10m0s
-      memory.available: 5m0s
-      nodefs.available: 10m0s
-      nodefs.inodesFree: 10m0s
-      pid.available: 2m0s
+    systemReserved:
+        cpu: 250m
+        memory: 200Mi
+        ephemeral-storage: 2Gi
+    kubeReserved:
+        cpu: 250m
+        memory: 1Gi
+        ephemeral-storage: 4Gi
+    evictionHard:
+        memory.available: 768Mi
+        nodefs.available: 8%
+        nodefs.inodesFree: 8%
+    evictionSoft:
+        memory.available: 1280Mi
+        nodefs.available: 10%
+        nodefs.inodesFree: 15%
+        imagefs.available: 10%
+        imagefs.inodesFree: 10%
+        pid.available: 10%
+    evictionSoftGracePeriod:
+        imagefs.available: 10m0s
+        imagefs.inodesFree: 10m0s
+        memory.available: 5m0s
+        nodefs.available: 10m0s
+        nodefs.inodesFree: 10m0s
+        pid.available: 2m0s
   userData: |
     CLUSTER_NAME=eks-dev
     INSTANCEGROUP=nodes-jobs
@@ -845,32 +845,32 @@ spec:
     httpPutResponseHopLimit: 2
     httpTokens: required
   kubelet:
-  systemReserved:
-      cpu: 250m
-      memory: 200Mi
-      ephemeral-storage: 2Gi
-  kubeReserved:
-      cpu: 250m
-      memory: 1Gi
-      ephemeral-storage: 4Gi
-  evictionHard:
-      memory.available: 768Mi
-      nodefs.available: 8%
-      nodefs.inodesFree: 8%
-  evictionSoft:
-      memory.available: 1280Mi
-      nodefs.available: 10%
-      nodefs.inodesFree: 15%
-      imagefs.available: 10%
-      imagefs.inodesFree: 10%
-      pid.available: 10%
-  evictionSoftGracePeriod:
-      imagefs.available: 10m0s
-      imagefs.inodesFree: 10m0s
-      memory.available: 5m0s
-      nodefs.available: 10m0s
-      nodefs.inodesFree: 10m0s
-      pid.available: 2m0s
+    systemReserved:
+        cpu: 250m
+        memory: 200Mi
+        ephemeral-storage: 2Gi
+    kubeReserved:
+        cpu: 250m
+        memory: 1Gi
+        ephemeral-storage: 4Gi
+    evictionHard:
+        memory.available: 768Mi
+        nodefs.available: 8%
+        nodefs.inodesFree: 8%
+    evictionSoft:
+        memory.available: 1280Mi
+        nodefs.available: 10%
+        nodefs.inodesFree: 15%
+        imagefs.available: 10%
+        imagefs.inodesFree: 10%
+        pid.available: 10%
+    evictionSoftGracePeriod:
+        imagefs.available: 10m0s
+        imagefs.inodesFree: 10m0s
+        memory.available: 5m0s
+        nodefs.available: 10m0s
+        nodefs.inodesFree: 10m0s
+        pid.available: 2m0s
   userData: |
     CLUSTER_NAME=eks-dev
     INSTANCEGROUP=nodes-monitoring
@@ -978,32 +978,32 @@ spec:
     httpPutResponseHopLimit: 2
     httpTokens: required
   kubelet:
-  systemReserved:
-      cpu: 250m
-      memory: 200Mi
-      ephemeral-storage: 2Gi
-  kubeReserved:
-      cpu: 250m
-      memory: 1Gi
-      ephemeral-storage: 4Gi
-  evictionHard:
-      memory.available: 768Mi
-      nodefs.available: 8%
-      nodefs.inodesFree: 8%
-  evictionSoft:
-      memory.available: 1280Mi
-      nodefs.available: 10%
-      nodefs.inodesFree: 15%
-      imagefs.available: 10%
-      imagefs.inodesFree: 10%
-      pid.available: 10%
-  evictionSoftGracePeriod:
-      imagefs.available: 10m0s
-      imagefs.inodesFree: 10m0s
-      memory.available: 5m0s
-      nodefs.available: 10m0s
-      nodefs.inodesFree: 10m0s
-      pid.available: 2m0s
+    systemReserved:
+        cpu: 250m
+        memory: 200Mi
+        ephemeral-storage: 2Gi
+    kubeReserved:
+        cpu: 250m
+        memory: 1Gi
+        ephemeral-storage: 4Gi
+    evictionHard:
+        memory.available: 768Mi
+        nodefs.available: 8%
+        nodefs.inodesFree: 8%
+    evictionSoft:
+        memory.available: 1280Mi
+        nodefs.available: 10%
+        nodefs.inodesFree: 15%
+        imagefs.available: 10%
+        imagefs.inodesFree: 10%
+        pid.available: 10%
+    evictionSoftGracePeriod:
+        imagefs.available: 10m0s
+        imagefs.inodesFree: 10m0s
+        memory.available: 5m0s
+        nodefs.available: 10m0s
+        nodefs.inodesFree: 10m0s
+        pid.available: 2m0s
   userData: |
     CLUSTER_NAME=eks-dev
     INSTANCEGROUP=nodes-workers

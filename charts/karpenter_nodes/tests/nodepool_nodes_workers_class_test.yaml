@@ -6,7 +6,7 @@ values:
 
 tests:
   - it: Verify nodes-workers kubelet
-    documentIndex: 3
+    documentIndex: 1
     asserts:
       - equal:
           path: spec.kubelet.systemReserved.cpu

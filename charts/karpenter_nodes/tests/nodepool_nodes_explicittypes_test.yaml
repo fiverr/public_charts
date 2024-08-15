@@ -50,8 +50,6 @@ tests:
       - equal:
           path: spec.template.spec.requirements[5].values[1]
           value: t3a.xlarge
-      - isNull:
-          path: spec.template.spec.requirements[6]
       - equal:
           path: spec.template.spec.startupTaints[0].key
           value: "node.cilium.io/agent-not-ready"

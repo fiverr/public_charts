@@ -1,4 +1,4 @@
-suite: test nodepool - nodes-default
+suite: test nodeclass - nodes-default
 templates:
   - nodeclass.yaml
 values:
