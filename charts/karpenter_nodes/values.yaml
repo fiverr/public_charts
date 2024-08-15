@@ -1,7 +1,7 @@
  ## Global Configuration
 
  # Karpenter API Version in CRD
-ApiVersion: v1beta1
+ApiVersion: v1
 
  # Nodes Configuration
 clusterName: "eks-cluster"    # My Cluster Name
@@ -60,7 +60,7 @@ detailedMonitoring: false
 associatePublicIPAddress: false
  # Consolidation Options
 expireAfter: "720h"
-consolidationPolicy: "WhenUnderutilized"
+consolidationPolicy: "WhenEmptyOrUnderutilized"
 consolidateAfter: "5m"
 
  # Default Instance Sizing

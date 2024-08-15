@@ -1,0 +1,22 @@
+suite: test nodepool - nodes-workers
+templates:
+  - nodeclass.yaml
+values:
+  - values.yaml
+
+tests:
+  - it: Verify nodes-workers kubelet
+    documentIndex: 1
+    asserts:
+      - equal:
+          path: spec.kubelet.systemReserved.cpu
+          value: 750m
+      - equal:
+          path: spec.kubelet.kubeReserved.ephemeral-storage
+          value: 4Gi
+      - equal:
+          path: spec.kubelet.clusterDNS[0]
+          value: "1.1.1.1"
+      - equal:
+          path: spec.kubelet.clusterDNS[1]
+          value: "2.2.2.2"
