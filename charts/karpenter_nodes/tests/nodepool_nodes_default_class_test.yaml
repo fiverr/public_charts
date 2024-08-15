@@ -9,8 +9,8 @@ tests:
     documentIndex: 0
     asserts:
       - equal:
-          path: spec.template.spec.kubelet.systemReserved.cpu
+          path: spec.kubelet.systemReserved.cpu
           value: 250m
       - equal:
-          path: spec.template.spec.kubelet.kubeReserved.ephemeral-storage
+          path: spec.kubelet.kubeReserved.ephemeral-storage
           value: 4Gi
