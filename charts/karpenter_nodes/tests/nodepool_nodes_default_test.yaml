@@ -127,16 +127,6 @@ tests:
           path: spec.template.spec.requirements[8].values[0]
           value: metal
 
-  - it: Verify nodes-default kubelet
-    documentIndex: 0
-    asserts:
-      - equal:
-          path: spec.template.spec.kubelet.systemReserved.cpu
-          value: 250m
-      - equal:
-          path: spec.template.spec.kubelet.kubeReserved.ephemeral-storage
-          value: 4Gi
-
   - it: Verify nodes-default Options
     documentIndex: 0
     asserts:
@@ -145,7 +135,7 @@ tests:
           value: 720h
       - equal:
           path: spec.disruption.consolidationPolicy
-          value: WhenUnderutilized
+          value: WhenEmptyOrUnderutilized
       - isNull:
           path: spec.disruption.consolidateAfter
       - isNull:
@@ -155,4 +145,3 @@ tests:
       - equal:
           path: spec.weight
           value: 1
-

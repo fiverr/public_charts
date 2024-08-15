@@ -1,0 +1,16 @@
+suite: test nodepool - nodes-default
+templates:
+  - nodeclass.yaml
+values:
+  - values.yaml
+
+tests:
+  - it: Verify nodes-default kubelet
+    documentIndex: 0
+    asserts:
+      - equal:
+          path: spec.template.spec.kubelet.systemReserved.cpu
+          value: 250m
+      - equal:
+          path: spec.template.spec.kubelet.kubeReserved.ephemeral-storage
+          value: 4Gi
