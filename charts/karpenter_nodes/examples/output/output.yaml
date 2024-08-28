@@ -1088,7 +1088,7 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-canary-amd64
-        apiVersion: karpenter.sh/v1
+        group: karpenter.k8s.aws
         kind: EC2NodeClass
       taints:
         - key: dedicated
@@ -1179,7 +1179,7 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-cilium-managed-amd64
-        apiVersion: karpenter.sh/v1
+        group: karpenter.k8s.aws
         kind: EC2NodeClass
       taints:
         - key: dedicated
@@ -1266,7 +1266,7 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-default-amd64
-        apiVersion: karpenter.sh/v1
+        group: karpenter.k8s.aws
         kind: EC2NodeClass
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
@@ -1433,7 +1433,7 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-gpu-amd64
-        apiVersion: karpenter.sh/v1
+        group: karpenter.k8s.aws
         kind: EC2NodeClass
       taints:
         - key: dedicated
@@ -1507,7 +1507,7 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-ingress-multiarch
-        apiVersion: karpenter.sh/v1
+        group: karpenter.k8s.aws
         kind: EC2NodeClass
       taints:
         - key: dedicated
@@ -1585,7 +1585,7 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-jobs-amd64
-        apiVersion: karpenter.sh/v1
+        group: karpenter.k8s.aws
         kind: EC2NodeClass
       taints:
         - key: dedicated
@@ -1665,7 +1665,7 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-monitoring-multiarch
-        apiVersion: karpenter.sh/v1
+        group: karpenter.k8s.aws
         kind: EC2NodeClass
       taints:
         - key: dedicated
@@ -1737,7 +1737,7 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-workers-amd64
-        apiVersion: karpenter.sh/v1
+        group: karpenter.k8s.aws
         kind: EC2NodeClass
       taints:
         - key: dedicated

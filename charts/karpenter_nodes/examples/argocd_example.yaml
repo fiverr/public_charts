@@ -9,7 +9,7 @@ spec:
   sources:
   - repoURL: 'https://opensource.fiverr.com/public_charts/'
     chart: karpenter_nodes
-    targetRevision: 1.1.3
+    targetRevision: 1.1.4
     helm:
       valueFiles:
       - $values/karpenter_nodes/eks-dev/common.yaml
