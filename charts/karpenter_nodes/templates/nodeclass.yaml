@@ -20,9 +20,11 @@ spec:
   {{- fail "nodeClass error: Either IamRole or IamInstanceProfile must be defined" }}
   {{- end }}
   amiFamily: {{ $v.amiFamily | default $.Values.amiFamily }}
-  {{- if or (hasKey $v "amiSelectorTerms") (hasKey $.Values "amiSelectorTerms") }}
   amiSelectorTerms:
+  {{- if or (hasKey $v "amiSelectorTerms") (hasKey $.Values "amiSelectorTerms") }}
     {{- toYaml ($v.amiSelectorTerms | default $.Values.amiSelectorTerms) | nindent 4 }}
+  {{- else }}
+    - alias: {{ lower $.Values.amiFamily }}@latest
   {{- end }}
   subnetSelectorTerms:
   {{- if hasKey $v "subnetSelectorTerms" }}
