@@ -17,6 +17,7 @@ spec:
   role: eks_nodes_role
   amiFamily: AL2
   amiSelectorTerms:
+    - alias: al2@latest
   subnetSelectorTerms:
     - tags:
         Name: eks-dev-eu-west-1a
@@ -150,6 +151,7 @@ spec:
   role: eks_nodes_role
   amiFamily: AL2
   amiSelectorTerms:
+    - alias: al2@latest
   subnetSelectorTerms:
     - tags:
         Name: eks-dev-eu-west-1a
@@ -283,6 +285,7 @@ spec:
   role: eks_nodes_role
   amiFamily: AL2
   amiSelectorTerms:
+    - alias: al2@latest
   subnetSelectorTerms:
     - tags:
         Name: eks-dev-eu-west-1a
@@ -416,6 +419,7 @@ spec:
   role: eks_nodes_role
   amiFamily: AL2
   amiSelectorTerms:
+    - alias: al2@latest
   subnetSelectorTerms:
     - tags:
         Name: eks-dev-eu-west-1a
@@ -549,6 +553,7 @@ spec:
   role: eks_nodes_role
   amiFamily: AL2
   amiSelectorTerms:
+    - alias: al2@latest
   subnetSelectorTerms:
     - tags:
         Name: eks-dev-eu-west-1a
@@ -675,6 +680,7 @@ spec:
   role: eks_nodes_role
   amiFamily: AL2
   amiSelectorTerms:
+    - alias: al2@latest
   subnetSelectorTerms:
     - tags:
         Name: eks-dev-eu-west-1a
@@ -808,6 +814,7 @@ spec:
   role: eks_nodes_role
   amiFamily: AL2
   amiSelectorTerms:
+    - alias: al2@latest
   subnetSelectorTerms:
     - tags:
         Name: eks-dev-eu-west-1a
@@ -942,6 +949,7 @@ spec:
   role: eks_nodes_role
   amiFamily: AL2
   amiSelectorTerms:
+    - alias: al2@latest
   subnetSelectorTerms:
     - tags:
         Name: eks-dev-eu-west-1a
@@ -1080,6 +1088,8 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-canary-amd64
+        apiVersion: karpenter.sh/v1
+        kind: EC2NodeClass
       taints:
         - key: dedicated
           effect: NoSchedule
@@ -1150,8 +1160,8 @@ spec:
             - "3"
             - "4"
             - "5"
+      expireAfter: 720h
   disruption:
-    expireAfter: 720h
     consolidationPolicy: WhenEmptyOrUnderutilized
   weight: 1
 ---
@@ -1169,6 +1179,8 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-cilium-managed-amd64
+        apiVersion: karpenter.sh/v1
+        kind: EC2NodeClass
       taints:
         - key: dedicated
           effect: NoSchedule
@@ -1235,8 +1247,8 @@ spec:
           operator: NotIn
           values:
           - metal
+      expireAfter: 720h
   disruption:
-    expireAfter: 720h
     consolidationPolicy: WhenEmptyOrUnderutilized
   weight: 1
 ---
@@ -1254,6 +1266,8 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-default-amd64
+        apiVersion: karpenter.sh/v1
+        kind: EC2NodeClass
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
@@ -1319,8 +1333,8 @@ spec:
             - "3"
             - "4"
             - "5"
+      expireAfter: 720h
   disruption:
-    expireAfter: 720h
     consolidationPolicy: WhenEmptyOrUnderutilized
   weight: 2
 ---
@@ -1399,8 +1413,8 @@ spec:
           operator: In
           values:
             - "6"
+      expireAfter: 720h
   disruption:
-    expireAfter: 720h
     consolidationPolicy: WhenEmptyOrUnderutilized
   weight: 1
 ---
@@ -1419,6 +1433,8 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-gpu-amd64
+        apiVersion: karpenter.sh/v1
+        kind: EC2NodeClass
       taints:
         - key: dedicated
           effect: NoSchedule
@@ -1470,8 +1486,8 @@ spec:
             - g5.xlarge
             - g5.2xlarge
             - g5.4xlarge
+      expireAfter: 720h
   disruption:
-    expireAfter: 720h
     consolidationPolicy: WhenEmptyOrUnderutilized
   limits:
     cpu: 128
@@ -1491,6 +1507,8 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-ingress-multiarch
+        apiVersion: karpenter.sh/v1
+        kind: EC2NodeClass
       taints:
         - key: dedicated
           effect: NoSchedule
@@ -1548,8 +1566,8 @@ spec:
           operator: NotIn
           values:
           - metal
+      expireAfter: Never
   disruption:
-    expireAfter: Never
     consolidationPolicy: WhenEmptyOrUnderutilized
   weight: 1
 ---
@@ -1567,6 +1585,8 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-jobs-amd64
+        apiVersion: karpenter.sh/v1
+        kind: EC2NodeClass
       taints:
         - key: dedicated
           effect: NoSchedule
@@ -1624,8 +1644,8 @@ spec:
           operator: NotIn
           values:
           - metal
+      expireAfter: Never
   disruption:
-    expireAfter: Never
     consolidationPolicy: WhenEmpty
     consolidateAfter: 5m
   weight: 1
@@ -1645,6 +1665,8 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-monitoring-multiarch
+        apiVersion: karpenter.sh/v1
+        kind: EC2NodeClass
       taints:
         - key: dedicated
           effect: NoSchedule
@@ -1696,8 +1718,8 @@ spec:
           operator: NotIn
           values:
           - metal
+      expireAfter: Never
   disruption:
-    expireAfter: Never
     consolidationPolicy: WhenEmptyOrUnderutilized
   weight: 1
 ---
@@ -1715,6 +1737,8 @@ spec:
     spec:
       nodeClassRef:
         name: nodes-workers-amd64
+        apiVersion: karpenter.sh/v1
+        kind: EC2NodeClass
       taints:
         - key: dedicated
           effect: NoSchedule
@@ -1784,8 +1808,8 @@ spec:
             - "3"
             - "4"
             - "5"
+      expireAfter: 720h
   disruption:
-    expireAfter: 720h
     consolidationPolicy: WhenEmptyOrUnderutilized
   weight: 2
 ---
@@ -1871,7 +1895,7 @@ spec:
             - "3"
             - "4"
             - "5"
+      expireAfter: 720h
   disruption:
-    expireAfter: 720h
     consolidationPolicy: WhenEmptyOrUnderutilized
   weight: 1

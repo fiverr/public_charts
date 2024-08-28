@@ -6,6 +6,8 @@ ApiVersion: v1
  # Nodes Configuration
 clusterName: "eks-cluster"    # My Cluster Name
 amiFamily: AL2    # Bottlerocket  #AL2023, Can be overridden by amiSelectorTerms
+amiSelectorTerms:
+  - alias: al2@latest
 IamRole: eks_nodes_role
 
 subnetSelectorTerms: []
