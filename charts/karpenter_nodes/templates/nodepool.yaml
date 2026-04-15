@@ -74,6 +74,12 @@ spec:
           {{- range $v.instances.cores | default $.Values.instances.cores }}
           - {{ . | quote }}
           {{- end }}
+      {{- if $v.instances.minMemory | default $.Values.instances.minMemory }}
+        - key: "karpenter.k8s.aws/instance-memory"
+          operator: Gt
+          values:
+          - {{ sub ($v.instances.minMemory | default $.Values.instances.minMemory | int) 1 | quote }}
+      {{- end }}
         - key: karpenter.k8s.aws/instance-generation
           operator: Gt
           values:
