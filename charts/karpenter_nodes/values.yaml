@@ -75,6 +75,7 @@ instances:
   - "4"
   - "8"
   - "16"
+  # minMemory: "16384"  # Optional - minimum instance memory in MiB (e.g. 16384 = 16 GiB)
   capacityType:
   - spot
   - on-demand
